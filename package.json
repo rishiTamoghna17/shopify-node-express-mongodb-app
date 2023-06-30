@@ -22,7 +22,7 @@
     "build": "vite build --config=./client/vite.config.cjs",
     "start": "NODE_ENV=prod node server/index.js",
     "pretty": "prettier --write .",
-    "ngrok:auth": "ngrok authtoken <your-auth-token>",
+    "ngrok:auth": "ngrok authtoken 2RvEwTHr33f2rQT5aPGvk2bmnnd_43LYxMkBJGUypAx2W7qFf",
     "ngrok": "ngrok http 5173",
     "ngrok:prod": "ngrok http 8081",
     "shopify": "shopify",
