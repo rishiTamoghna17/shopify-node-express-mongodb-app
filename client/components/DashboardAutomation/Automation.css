@@ -1,0 +1,64 @@
+.card {
+    width: 250px;
+    height: 150px;
+    background-color: black;
+    color: white;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+   
+  }
+  
+  .card h3 {
+    margin-bottom: 10px;
+  }
+  
+  .card-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-content .icon {
+    margin-left: 10px;
+  }
+  .automation-all {
+    background-color: rgba(0, 0, 0, 0.877);
+    border-radius: 5px;
+  }
+  .automation-text {
+    color: white;
+    padding-left: 10px;
+    border-bottom: 0.01em solid rgb(167, 164, 164);
+    padding-bottom: 1.5px;
+    text-decoration: underline solid white 30%;
+    border-bottom: 1px solid #ffffff;
+  }
+  .automate-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   
+    }
+  
+  /* Additional styling for specific elements */
+  .percentage,
+  .hours,
+  .score,
+  .cost,
+  .duration,
+  .count,
+  .revenue {
+    font-weight: bold;
+  }
+  
+  .percentage::after,
+  .hours::after {
+    content: '%';
+  }
+  
+  .cost::after,
+  .revenue::after {
+    content: 'USD';
+  }

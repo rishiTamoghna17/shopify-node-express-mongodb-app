@@ -1,0 +1,39 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 0 40px;
+    height: 60px;
+    border-bottom: 0.01em solid white;
+    border-radius: 10px;
+  }
+  
+  .analytics {
+    margin: 0;
+    font-size: 24px; 
+  }
+  
+  .right-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button-storeName {
+    color: white;
+    font-weight: bold; 
+  }
+  
+  .profile-icon {
+    color: white;
+    margin-left: 10px; 
+    margin-right: 10px;
+    font-size: 20px; 
+  }
+  .organization{
+    color: white;
+    margin-right: 10px;
+  }
+  
+  
