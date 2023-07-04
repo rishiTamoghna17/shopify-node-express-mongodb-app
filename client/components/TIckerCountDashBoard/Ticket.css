@@ -1,0 +1,53 @@
+.ticket-count-dashboard {
+  background-color: rgba(0, 0, 0, 0.877);
+  padding: 20px;
+  color: #f8f8f8;
+
+}
+.ticket-count-allignment{
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ticket-count-heading {
+  margin-top: 20px;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.ticket-count-heading h1 {
+  font-size: 24px;
+}
+
+.total-ticket-count {
+  font-size: 24px;
+  color: red;
+  padding-left: 30px;
+  flex-direction: column;
+  font-weight: bold;
+  align-items: center;
+  background: linear-gradient(to bottom, red, orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ticket-filters {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.ticket-filters select {
+  background-color: rgba(0, 0, 0, 0.308);
+  color: #f8f8f8;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ticket-graph {
+  /* Add styling for the graph container as needed */
+}

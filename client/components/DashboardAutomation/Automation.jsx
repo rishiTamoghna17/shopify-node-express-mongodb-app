@@ -4,23 +4,23 @@ import useFetch from "../../hooks/useFetch";
 import { ProfileMajor } from "@shopify/polaris-icons";
 import "./Automation.css";
 import Chart from "react-apexcharts";
-import fetchTicketContent from "../../libraby/ticketData"
 
 function Automation() {
   const [ticket, setTicket] = useState([]);
-
+  const fetch = useFetch();
+  //ticket call
+  async function fetchContent() {
+    setTicket("loading...");
+    const res = await fetch("/api/tickets");
+    const response = await res.json();
+    if (response.error) {
+      setTicket(data.error);
+    } else {
+      setTicket(response);
+    }
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      const ticketData = await fetchTicketContent();
-      
-      if (ticketData.error) {
-        setTicket(data.error);
-      } else {
-        setTicket(ticketData);
-      }
-    };
-
-    fetchData();
+    fetchContent();
   }, []);
 
   const SupportAutomationCard = () => {

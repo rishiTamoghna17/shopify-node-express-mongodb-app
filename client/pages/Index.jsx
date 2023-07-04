@@ -5,6 +5,7 @@ import { navigate } from "raviger";
 import React,{useState} from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Automation from "../components/DashboardAutomation/Automation";
+import Ticket from "../components/TIckerCountDashBoard/Ticket";
 
 
 
@@ -13,6 +14,7 @@ const HomePage = () => {
    <Page fullWidth >
     
      <Navbar/>
+     <Ticket/>
      <Automation/>
    </Page>
   
