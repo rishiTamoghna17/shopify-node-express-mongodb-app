@@ -2,12 +2,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.877);
     color: white;
     padding: 0 40px;
     height: 60px;
-    border-bottom: 0.01em solid white;
-    border-radius: 10px;
+    /* margin-bottom: 1px; */
+    border-bottom: 0.5pt solid rgb(94, 92, 92);
+    /* border-radius: 10px; */
+
   }
   
   .analytics {
@@ -26,10 +28,11 @@
   }
   
   .profile-icon {
-    color: white;
-    margin-left: 10px; 
-    margin-right: 10px;
-    font-size: 20px; 
+    background-image: url("https://wallpapers.com/images/featured/cool-profile-picture-87h46gcobjl5e4xu.jpg");
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
   }
   .organization{
     color: white;

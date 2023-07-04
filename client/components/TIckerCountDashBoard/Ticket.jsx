@@ -37,10 +37,10 @@ function Ticket() {
           show: true,
         },
         axisBorder: {
-          show: false,
+          show: true,
         },
         axisTicks: {
-          show: true,
+          show: false,
         },
       },
       yaxis: {
@@ -186,7 +186,7 @@ function Ticket() {
           options={chartData.options}
           series={chartData.series}
           type="line"
-          height={300}
+          height={150}
         />
       </div>
     </div>

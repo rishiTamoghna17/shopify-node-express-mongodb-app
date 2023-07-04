@@ -25,21 +25,24 @@
   }
   .automation-all {
     background-color: rgba(0, 0, 0, 0.877);
-    border-radius: 5px;
+    /* border-radius: 5px; */
   }
   .automation-text {
     color: white;
-    padding-left: 10px;
-    border-bottom: 0.01em solid rgb(167, 164, 164);
-    padding-bottom: 1.5px;
-    text-decoration: underline solid white 30%;
-    border-bottom: 1px solid #ffffff;
+    /* padding-left: 10px; */
+    padding: 0 40px;
+    padding-bottom: 4px;
+    margin: 0;
+    font-size: 24px; 
+    text-decoration: underline solid white 15%;
+    border-bottom: 0.5pt solid rgb(94, 92, 92);
   }
   .automate-dashboard {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
    
+    padding: 10px 40px;
     }
   
   /* Additional styling for specific elements */
@@ -111,6 +114,12 @@
   margin-top: 10px;
 }
 
+.chart-top-support-request,
+.chart-most-requested-hours{
+  .apexcharts-xaxis-label {
+    fill: white;
+  };
+}
 
 
 

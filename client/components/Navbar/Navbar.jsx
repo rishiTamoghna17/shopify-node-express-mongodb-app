@@ -29,7 +29,7 @@ export default function Navbar() {
         <Button className="button-storeName" plain disclosure={expanded ? 'up' : 'down'} onClick={() => { setExpanded(!expanded); }}>
            {responseDataGQL}
         </Button>
-        <Icon className="profile-icon" source={ProfileMajor} color="base" />
+        <div className="profile-icon" ></div>
       </div>
     </div>
   );

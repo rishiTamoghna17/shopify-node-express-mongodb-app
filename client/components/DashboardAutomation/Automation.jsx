@@ -4,6 +4,8 @@ import useFetch from "../../hooks/useFetch";
 import { ProfileMajor } from "@shopify/polaris-icons";
 import "./Automation.css";
 import Chart from "react-apexcharts";
+import {BiMessage,BiSolidCircleQuarter} from "react-icons/bi"
+import {FaRegClock} from "react-icons/fa";
 
 function Automation() {
   const [ticket, setTicket] = useState([]);
@@ -42,7 +44,7 @@ function Automation() {
         <h3>Support Automation (100%)</h3>
         <div className="card-content">
           <div className="percentage">{automationPercentage}</div>
-          <div className="icon">Automation Icon</div>
+          <div className="icon"><BiMessage color= "blue"/></div>
         </div>
       </div>
     );
@@ -56,7 +58,7 @@ function Automation() {
         <h3>Human Hours Saved</h3>
         <div className="card-content">
           <div className="hours">{hoursSaved} </div>
-          <div className="icon">Hours Icon</div>
+          <div className="icon"><FaRegClock color = "yellow"/></div>
         </div>
       </div>
     );
@@ -70,7 +72,7 @@ function Automation() {
         <h3>CSAT Score</h3>
         <div className="card-content">
           <div className="score">{csatScore}%</div>
-          <div className="icon">CSAT Icon</div>
+          <div className="icon"><BiSolidCircleQuarter color = "red" /></div>
         </div>
       </div>
     );
@@ -247,7 +249,7 @@ function Automation() {
           options={chartData.options}
           series={chartData.series}
           type="line"
-          height={150}
+          height={200}
           />
         </div>
           <div className="card-content">
@@ -318,11 +320,11 @@ function Automation() {
       <div className="Hours-card">
         <h3>Most Requested Hours</h3>
         <div className="hours-chart">
-          <Chart
+          <Chart className="chart-most-requested-hours"
             options={chartData.options}
             series={chartData.series}
             type="line"
-            height={300}
+            height={200}
           />
         </div>
       </div>
@@ -435,7 +437,7 @@ function Automation() {
       <div className="Hours-card">
         <h3>Top 5 Support Request Categories</h3>
         <div className="hours-chart">
-          <Chart options={chartData.options} series={chartData.series} type="line" height={300} />
+          <Chart className= "chart-top-support-request"options={chartData.options} series={chartData.series} type="line" height={200} />
         </div>
       </div>
     );
