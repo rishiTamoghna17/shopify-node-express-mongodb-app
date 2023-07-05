@@ -1,70 +1,107 @@
 .card {
-    width: 250px;
-    height: 150px;
-    background-color: black;
-    color: white;
-    /* border: 1px solid #ccc; */
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    /* display: inline-block; */
-   
-  }
-  
-  .card h3 {
-    margin-bottom: 10px;
-  }
-  
-  .card-content {
-    display: flex;
-    align-items: center;
-  }
-  
-  .card-content .icon {
-    margin-left: 10px;
-  }
-  .automation-all {
-    background-color: rgba(0, 0, 0, 0.877);
-    /* border-radius: 5px; */
-  }
-  .automation-text {
-    color: white;
-    /* padding-left: 10px; */
-    padding: 0 40px;
-    padding-bottom: 4px;
-    margin: 0;
-    font-size: 24px; 
-    text-decoration: underline solid white 15%;
-    border-bottom: 0.5pt solid rgb(94, 92, 92);
-  }
-  .automate-dashboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-   
-    padding: 10px 40px;
-    }
-  
-  /* Additional styling for specific elements */
-  .percentage,
-  .hours,
-  .score,
-  .cost,
-  .duration,
-  .count,
-  .revenue {
-    font-weight: bold;
-  }
-  
-  .percentage::after,
-  .hours::after {
-    content: '%';
-  }
-  
-  .cost::after,
-  .revenue::after {
-    content: 'USD';
-  }
+  width: 250px;
+  height: 125px;
+  background-color: black;
+  color: white;
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  /* display: inline-block; */
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.icon {
+  position: absolute; 
+  right: 0; 
+}
+.automation-icon-queue{
+  position: absolute; 
+  right: 0; 
+  display: flex;
+  align-items: center;
+}
+
+ .automation-queue {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: right;
+  margin-left: 20px;
+}
+.automation-icon-queue::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 4px; /* Adjust the margin as needed */
+}
+.automation-icon{
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Additional styling for specific elements */
+.card-content-value {
+  font-weight: bold;
+}
+
+.card-percentile {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.percentage-icon {
+  /* margin-left: 10px; */
+}
+
+.percentage-value {
+  margin-left: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.custom-tooltip {
+  display: inline-block;
+  padding: 4px 8px;
+  color: red;
+  background-color: white;
+}
+
+.automation-all {
+  background-color: rgba(0, 0, 0, 0.877);
+  /* border-radius: 5px; */
+}
+.automation-text {
+  color: white;
+  /* padding-left: 10px; */
+  padding: 0 40px;
+  padding-bottom: 4px;
+  margin: 0;
+  font-size: 24px;
+  text-decoration: underline solid white 15%;
+  border-bottom: 0.5pt solid rgb(94, 92, 92);
+}
+.automate-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  padding: 10px 40px;
+}
+
 /* automated content card  */
 .Automation-card {
   width: 250px;
@@ -81,17 +118,6 @@
 
 .queue-chart {
   margin-bottom: 10px;
-}
-
-.card-content {
-  display: flex;
-  align-items: center;
-}
-
-.card-content .queue {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: right;
 }
 
 /* Most Support Request Hours Card */
@@ -115,12 +141,9 @@
 }
 
 .chart-top-support-request,
-.chart-most-requested-hours{
+.chart-most-requested-hours {
   .apexcharts-xaxis-label {
     fill: white;
-  };
+  }
 }
 
-
-
-  

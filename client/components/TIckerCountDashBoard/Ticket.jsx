@@ -54,8 +54,11 @@ function Ticket() {
         show: false,
       },
       tooltip: {
-        enabled: false,
-        show: false,
+        enabled: true,
+        show: true,
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+          return `<div class="custom-tooltip">${series[seriesIndex][dataPointIndex]}</div>`;
+        },
       },
     },
     series: [
