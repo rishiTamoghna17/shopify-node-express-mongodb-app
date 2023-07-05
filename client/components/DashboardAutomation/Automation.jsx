@@ -96,7 +96,7 @@ function Automation() {
     return (
       <Card
       title="Human Hours Saved"
-      value={`${hoursSaved} %`}
+      value={`${hoursSaved} `}
       icon={<FaRegClock color="yellow" size="25px" />}
       percentage={human_hours}
       threshold={0}
