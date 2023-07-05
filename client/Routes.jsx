@@ -7,9 +7,11 @@ import DebugIndex from "./pages/debugCards/DebugIndex";
 import DevNotes from "./pages/debugCards/DevNotes";
 import GetData from "./pages/debugCards/GetData";
 import Index from "./pages/Index";
+import Ticket from "./pages/TicketsPage/ticketPage"
 
 const routes = {
   "/": () => <Index />,
+  "/tickets": () => <Ticket/>,
   "/exitframe": () => <ExitFrame />,
   "/exitframe/:shop": ({ shop }) => <ExitFrame shop={shop} />,
   //Debug Cards

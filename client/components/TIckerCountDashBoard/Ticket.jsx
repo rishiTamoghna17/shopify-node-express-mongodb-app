@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Ticket.css";
 import Chart from "react-apexcharts";
 import useFetch from "../../hooks/useFetch";
+import { AiOutlineMail } from "react-icons/ai";
 
 const dummyTicketData = [
   // Replace this with your actual dummy data for tickets
@@ -15,7 +16,7 @@ const dummyTicketData = [
   // Add more data as needed
 ];
 
-function Ticket() {
+function Ticket({graph}) {
   const [ticket, setTicket] = useState([]);
   const fetch = useFetch();
   const [chartData, setChartData] = useState({
@@ -184,7 +185,7 @@ function Ticket() {
           </select>
         </div>
       </div>
-      <div className="ticket-graph">
+      <div className={graph==true?"ticket-graph":"ticket-disabled"}>
         <Chart
           options={chartData.options}
           series={chartData.series}

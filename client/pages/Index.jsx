@@ -2,29 +2,39 @@ import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
 import { Layout, LegacyCard, Page } from "@shopify/polaris";
 import { navigate } from "raviger";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Automation from "../components/DashboardAutomation/Automation";
 import Ticket from "../components/TIckerCountDashBoard/Ticket";
 
-
-
 const HomePage = () => {
   return (
-   <Page fullWidth >
-    
-     <Navbar/>
-     <Ticket/>
-     <Automation/>
-   </Page>
-  
-
+    <Page fullWidth>
+      <Navbar />
+      <Ticket graph />
+      <Automation
+        heading
+        SupportAutomationCard
+        HumanHoursSavedCard
+        CSATScoreCard
+        CostSavedWithAutomationCard
+        AverageRequestDurationCard
+        CreatedTicketsCard
+        InProgressTicketsCard
+        SolvedTicketsCard
+        RoutedEscalatedTicketsCard
+        GeneratedRevenueCard
+        CurrentAutomationQueueCard
+        MostSupportRequestHoursCard
+        TopSupportRequestCategoriesCard
+      />
+    </Page>
   );
 };
 export default HomePage;
 
-
-{/* <Layout>
+{
+  /* <Layout>
 <Layout.Section fullWidth>
   <LegacyCard
     title="Debug Cards"
@@ -157,4 +167,5 @@ export default HomePage;
     </p>
   </LegacyCard>
 </Layout.Section>
-</Layout> */}
+</Layout> */
+}

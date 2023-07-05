@@ -18,7 +18,7 @@ import { MdRoute } from "react-icons/md";
 import { LuArrowDownRight } from "react-icons/lu";
 import { MdArrowOutward } from "react-icons/md";
 
-function Automation() {
+function Automation(props) {
   const [ticket, setTicket] = useState([]);
   const fetch = useFetch();
   //ticket call
@@ -47,7 +47,7 @@ function Automation() {
   const Card = ({ title, value, icon, percentage, threshold }) => {
     return (
       <div className="card">
-        <h3>{title}</h3>
+        {<h3>{title}</h3>}
         <div className="card-content">
           <div className="card-content-value">{value}</div>
           <div className="icon">{icon}</div>
@@ -195,7 +195,7 @@ function Automation() {
 
     return (
       <Card
-      title="Solved Tickets"
+      title="Solved/close Tickets"
       value={`${solvedTickets.length}`}
       icon={<LiaLockSolid color="blue" size="25px" />}
       percentage={save_ticket}
@@ -547,21 +547,21 @@ function Automation() {
 
   return (
     <div className="automation-all">
-      <h1 className="automation-text">Automation</h1>
+      {props.heading && <h1 className="automation-text">Automation</h1>}
       <div className="automate-dashboard">
-        <SupportAutomationCard />
-        <HumanHoursSavedCard />
-        <CSATScoreCard />
-        <CostSavedWithAutomationCard />
-        <AverageRequestDurationCard />
-        <CreatedTicketsCard />
-        <InProgressTicketsCard />
-        <SolvedTicketsCard />
-        <RoutedEscalatedTicketsCard />
-        <GeneratedRevenueCard />
-        <CurrentAutomationQueueCard />
-        <MostSupportRequestHoursCard />
-        <TopSupportRequestCategoriesCard />
+      {props.SupportAutomationCard && <SupportAutomationCard />}
+       {props.HumanHoursSavedCard && <HumanHoursSavedCard />}
+        {props.CSATScoreCard && <CSATScoreCard />}
+        {props.CostSavedWithAutomationCard && <CostSavedWithAutomationCard />}
+        {props.AverageRequestDurationCard && <AverageRequestDurationCard />}
+        {props.CreatedTicketsCard && <CreatedTicketsCard />}
+        {props.InProgressTicketsCard && <InProgressTicketsCard />}
+        {props.SolvedTicketsCard && <SolvedTicketsCard />}
+        {props.RoutedEscalatedTicketsCard && <RoutedEscalatedTicketsCard />}
+        {props.GeneratedRevenueCard && <GeneratedRevenueCard />}
+        {props.CurrentAutomationQueueCard && <CurrentAutomationQueueCard />}
+        {props.MostSupportRequestHoursCard && <MostSupportRequestHoursCard />}
+        {props.TopSupportRequestCategoriesCard && <TopSupportRequestCategoriesCard />}
       </div>
     </div>
   );

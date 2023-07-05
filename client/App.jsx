@@ -23,13 +23,18 @@ export default function App() {
         <NavigationMenu
           navigationLinks={[
             {
+              label: "Ticket/Conversations",
+              destination: "/tickets"
+            },
+            {
               label: "Fetch Data",
               destination: "/debug/getData",
             },
             {
               label: "Billing API",
               destination: "/debug/billing",
-            },
+            }
+            
           ]}
           matcher={(link) => currentPath === link.destination}
         />

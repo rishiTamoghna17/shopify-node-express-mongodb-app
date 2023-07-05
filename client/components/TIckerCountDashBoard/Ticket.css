@@ -31,6 +31,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .ticket-filters {
   display: flex;
   justify-content: flex-end;
@@ -38,7 +39,7 @@
 }
 
 .ticket-filters select {
-  background-color: rgba(0, 0, 0, 0.308);
+  background-color: rgba(78, 77, 77, 0.712);
   color: #f8f8f8;
   border: none;
   border-radius: 5px;
@@ -64,6 +65,10 @@
   .apexcharts-xaxis-label {
     fill: white;
   };
+}
+.ticket-disabled{
+  display: none;
+  visibility: hidden;
 }
 
 
