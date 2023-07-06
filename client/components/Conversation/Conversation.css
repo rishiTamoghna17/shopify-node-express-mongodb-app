@@ -1,6 +1,7 @@
 .conversation-start {
   background-color: rgba(0, 0, 0, 0.877);
   position: relative;
+  max-height: 100%;
 }
 .conversation-heading {
   display: flex;
@@ -12,11 +13,11 @@
   color: white;
   /* padding-left: 10px; */
   padding: 0 40px;
-  padding-bottom: 4px;
+  /* padding-bottom: 4px; */
   margin: 0;
   font-size: 24px;
   text-decoration: underline solid white 15%;
-  border-bottom: 0.5pt solid rgb(94, 92, 92);
+  /* border-bottom: 0.5pt solid rgb(94, 92, 92); */
 }
 
 .conversation-filters {
@@ -76,10 +77,18 @@
 
 /* table */
 
-.conversation-line-items {
+.table-card {
+  border: 1px solid #cccccc38;
+  /* border-radius: 4px; */
+  padding: 15px;
+}
+
+.conversation-line-items-table {
   margin-top: 20px;
   border-collapse: collapse;
   width: 100%;
+  border: 1px solid #cccccc38;
+  border-radius: 10px;
 }
 
 .conversation-line-item-header {
@@ -111,15 +120,24 @@
 }
 
 /* table body */
-tbody {
+
+.conversation-line-table-body-item-card {
   background-color: black; /* Set background color */
   color: white; /* Set text color */
+  border-top: 1px solid #cccccc38;
+
 }
 
-tbody td {
+.conversation-line-table-body-item {
   padding: 10px; /* Set cell padding */
+  border-top: 1px solid #cccccc38;
 }
-
+.conversation-line-items-table-pagination-load-more-button{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .load-more-button {
   padding: 5px 10px;
   background-color: #eb523e98;
@@ -128,8 +146,9 @@ tbody td {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
-  position: absolute;
-  left: 50%;
+  /* align-items: center; */
+  /* position: absolute; */
+  /* left: 50%; */
   /* bottom: 5px; */
 }
 

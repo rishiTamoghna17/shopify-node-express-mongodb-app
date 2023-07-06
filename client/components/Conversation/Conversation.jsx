@@ -1,34 +1,71 @@
-import React,{useState} from "react";
-import {dummyTicket} from "../../assets/dummydata.js"; 
-import {AiOutlineSearch} from "react-icons/ai";
-import {AiOutlineMail} from "react-icons/ai";
-import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi';
+import React, { useState } from "react";
+import { dummyTicket } from "../../assets/dummydata.js";
+import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai";
+import {
+  BiSolidUpArrow,
+  BiSolidDownArrow,
+  BiSolidSortAlt,
+} from "react-icons/bi";
+import { LiaSortSolid } from "react-icons/lia";
 import "./Conversation.css";
 
-
-
 function Conversation() {
-    const [sortOrder, setSortOrder] = useState('asc');
-  const [sortField, setSortField] = useState('');
-  const handleSort = (field) => {
-    if (sortField === field) {
-      // If the same field is clicked again, reverse the sort order
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  const [sortColumn, setSortColumn] = useState("");
+  const [ticket, setTicket] = useState(dummyTicket);
+  const [sortOrder, setSortOrder] = useState("");
+
+  //sorting logic
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
-      // If a new field is clicked, set the sort field and order
-      setSortField(field);
-      setSortOrder('asc');
+      setSortColumn(column);
+      setSortOrder("asc");
     }
   };
-
-  const sortedData = dummyTicket.sort((a, b) => {
-    // Sort the data based on the sortField and sortOrder
-    if (sortOrder === 'asc') {
-      return a[sortField] > b[sortField] ? 1 : -1;
-    } else {
-      return a[sortField] < b[sortField] ? 1 : -1;
+  //data sorting
+  const sortedTicket = ticket.sort((a, b) => {
+    if (sortColumn === "Customer") {
+      return sortOrder === "asc"
+        ? a.customer.localeCompare(b.customer)
+        : b.customer.localeCompare(a.customer);
+    } else if (sortColumn === "Email") {
+      return sortOrder === "asc"
+        ? a.email.localeCompare(b.email)
+        : b.email.localeCompare(a.email);
+    } else if (sortColumn === "Ticket ID") {
+      return sortOrder === "asc"
+        ? a.ticketId - b.ticketId
+        : b.ticketId - a.ticketId;
+    } else if (sortColumn === "Request Type") {
+      return sortOrder === "asc"
+        ? a.requestType.localeCompare(b.requestType)
+        : b.requestType.localeCompare(a.requestType);
+    } else if (sortColumn === "Requested Date") {
+      return sortOrder === "asc"
+        ? new Date(a.requestedDate) - new Date(b.requestedDate)
+        : new Date(b.requestedDate) - new Date(a.requestedDate);
+    } else if (sortColumn === "Priority") {
+      return sortOrder === "asc"
+        ? a.priority.localeCompare(b.priority)
+        : b.priority.localeCompare(a.priority);
+    } else if (sortColumn === "Status") {
+      return sortOrder === "asc"
+        ? a.status.localeCompare(b.status)
+        : b.status.localeCompare(a.status);
+    } else if (sortColumn === "Channel") {
+      return sortOrder === "asc"
+        ? a.channel.localeCompare(b.channel)
+        : b.channel.localeCompare(a.channel);
+    } else if (sortColumn === "Total Orders") {
+      return sortOrder === "asc"
+        ? a.totalOrders - b.totalOrders
+        : b.totalOrders - a.totalOrders;
     }
+    return 0;
   });
+  //handle pagination
 
   return (
     <div className="conversation-start">
@@ -37,7 +74,7 @@ function Conversation() {
         <div className="conversation-filters">
           {/* Search bar */}
           <h1 className="conversation-filters-title">
-            showing result 15 of 4114
+            showing result 15 of {ticket.length}
           </h1>
           <input type="text" placeholder="Search " />
 
@@ -61,95 +98,207 @@ function Conversation() {
           {/* Sort by filter */}
           <select>
             <option value="">Sort by</option>
-            <option value="requestedDateAsc">Requested Date (Asc)</option>
-            <option value="requestedDateDesc">Requested Date (Desc)</option>
-            <option value="customerNameAsc">Customer Name (Asc)</option>
-            <option value="customerNameDesc">Customer Name (Desc)</option>
-            <option value="totalOrdersAsc">Total Orders (Asc)</option>
-            <option value="totalOrdersDesc">Total Orders (Desc)</option>
+            <option value="requestedDateAsc">Requested Date </option>
+            <option value="customerNameAsc">Customer Name </option>
+            <option value="totalOrdersDesc">Total Orders </option>
           </select>
         </div>
       </div>
 
       {/* Conversation line items */}
-      <table className="conversation-line-items">
-      <thead>
-        <tr className="conversation-line-item-header">
-          <th onClick={() => handleSort('customer')}>
-            Customer{' '}
-            {sortField === 'customer' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('email')}>
-            Email{' '}
-            {sortField === 'email' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('ticketId')}>
-            Ticket ID{' '}
-            {sortField === 'ticketId' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('requestType')}>
-            Request Type{' '}
-            {sortField === 'requestType' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('requestedDate')}>
-            Requested Date{' '}
-            {sortField === 'requestedDate' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('priority')}>
-            Priority{' '}
-            {sortField === 'priority' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('status')}>
-            Status{' '}
-            {sortField === 'status' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('channel')}>
-            Channel{' '}
-            {sortField === 'channel' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-          <th onClick={() => handleSort('totalOrders')}>
-            Total Orders{' '}
-            {sortField === 'totalOrders' && (
-              <span>{sortOrder === 'asc' ? <BiSolidUpArrow /> : <BiSolidDownArrow />}</span>
-            )}
-          </th>
-        </tr>
-      </thead>
-        <tbody>
-          {dummyTicket.map((conversation) => (
-            <tr key={conversation.ticketId}>
-              <td>{conversation.customer}</td>
-              <td>{conversation.email}</td>
-              <td>{conversation.ticketId}</td>
-              <td>{conversation.requestType}</td>
-              <td>{conversation.requestedDate}</td>
-              <td>{conversation.priority}</td>
-              <td>{conversation.status}</td>
-              <td>{conversation.channel}</td>
-              <td>{conversation.totalOrders}</td>
+      <div className="table-card">
+        <table className="conversation-line-items-table">
+          <thead>
+            <tr className="conversation-line-item-header">
+              <th>
+                Customer
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Customer")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Email
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Email")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Ticket ID
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Ticket ID")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Request Type
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Request Type")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Requested Date
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Requested Date")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Priority
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Priority")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Status
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Status")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Channel
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Channel")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
+              <th>
+                Total Orders
+                <span
+                  className="sort-arrow"
+                  onClick={() => handleSort("Total Orders")}
+                >
+                  <BiSolidSortAlt
+                    color="white"
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedTicket.map((conversation) => (
+              <tr
+                className="conversation-line-table-body-item-card"
+                key={conversation.ticketId}
+              >
+                <td className="conversation-line-table-body-item">
+                  {conversation.customer}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.email}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.ticketId}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.requestType}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.requestedDate}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.priority}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.status}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.channel}
+                </td>
+                <td className="conversation-line-table-body-item">
+                  {conversation.totalOrders}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="conversation-line-items-table-pagination-load-more-button">
+          <button className="load-more-button">LOAD MORE</button>
+        </div>
+      </div>
 
       {/* Load more button */}
-      <button className="load-more-button">LOAD MORE</button>
     </div>
   );
 }

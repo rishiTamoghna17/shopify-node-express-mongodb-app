@@ -7,9 +7,11 @@ import "./ticketPage.css"
 function ticket() {
   return (
     <Page fullWidth>
+      <div>
       <Ticket />
       <Automation SupportAutomationCard CreatedTicketsCard InProgressTicketsCard SolvedTicketsCard RoutedEscalatedTicketsCard/>
       <Conversation/>
+      </div>
     </Page>
   )
 }
