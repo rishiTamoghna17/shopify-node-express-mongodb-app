@@ -14,6 +14,8 @@ function Conversation() {
   const [sortColumn, setSortColumn] = useState("");
   const [ticket, setTicket] = useState(dummyTicket);
   const [sortOrder, setSortOrder] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(15);
+const [displayedItems, setDisplayedItems] = useState(itemsPerPage);
 
   //sorting logic
   const handleSort = (column) => {
@@ -66,6 +68,10 @@ function Conversation() {
     return 0;
   });
   //handle pagination
+  const handleLoadMore = () => {
+    setDisplayedItems((prevDisplayedItems) => prevDisplayedItems + itemsPerPage);
+  };
+  
 
   return (
     <div className="conversation-start">
@@ -257,7 +263,7 @@ function Conversation() {
             </tr>
           </thead>
           <tbody>
-            {sortedTicket.map((conversation) => (
+            {sortedTicket.slice(0, displayedItems).map((conversation) => (
               <tr
                 className="conversation-line-table-body-item-card"
                 key={conversation.ticketId}
@@ -294,7 +300,7 @@ function Conversation() {
           </tbody>
         </table>
         <div className="conversation-line-items-table-pagination-load-more-button">
-          <button className="load-more-button">LOAD MORE</button>
+          <button className="load-more-button" onClick={handleLoadMore} disabled={displayedItems >= sortedTicket.length}>LOAD MORE</button>
         </div>
       </div>
 
