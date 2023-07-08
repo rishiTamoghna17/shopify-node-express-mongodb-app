@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { dummyTicket } from "../../assets/dummydata.js";
-import { AiOutlineSearch } from "react-icons/ai";
-import { AiOutlineMail } from "react-icons/ai";
-import {
-  BiSolidUpArrow,
-  BiSolidDownArrow,
-  BiSolidSortAlt,
-} from "react-icons/bi";
-import { LiaSortSolid } from "react-icons/lia";
+import { BiSolidSortAlt } from "react-icons/bi";
 import "./Conversation.css";
 
 function Conversation() {
@@ -89,7 +82,6 @@ function Conversation() {
     }); //to set table starting point
   };
 
-
   return (
     <div className="conversation-start">
       <div className="conversation-heading">
@@ -132,7 +124,7 @@ function Conversation() {
 
       {/* Conversation line items */}
       <div className="table-card">
-        <table className="conversation-line-items-table">
+        <table className="conversation-line-items-table" >
           <thead>
             <tr className="conversation-line-item-header">
               <th>
@@ -141,13 +133,9 @@ function Conversation() {
                   className="sort-arrow"
                   onClick={() => handleSort("Customer")}
                 >
-                  <BiSolidSortAlt
+                  <BiSolidSortAlt className="sort-icon"
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    
                   />
                 </span>
               </th>
@@ -157,13 +145,10 @@ function Conversation() {
                   className="sort-arrow"
                   onClick={() => handleSort("Email")}
                 >
-                  <BiSolidSortAlt
+                  <BiSolidSortAlt 
+                  className="sort-icon"
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    
                   />
                 </span>
               </th>
@@ -175,11 +160,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
@@ -191,11 +172,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
@@ -207,11 +184,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
@@ -223,11 +196,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
@@ -239,11 +208,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
@@ -255,11 +220,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
@@ -271,11 +232,7 @@ function Conversation() {
                 >
                   <BiSolidSortAlt
                     color="white"
-                    style={{
-                      fontSize: "10px",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                    }}
+                    className="sort-icon"
                   />
                 </span>
               </th>
