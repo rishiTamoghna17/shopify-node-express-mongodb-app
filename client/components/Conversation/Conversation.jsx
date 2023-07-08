@@ -15,7 +15,8 @@ function Conversation() {
   const [ticket, setTicket] = useState(dummyTicket);
   const [sortOrder, setSortOrder] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(15);
-const [displayedItems, setDisplayedItems] = useState(itemsPerPage);
+  const [displayedItems, setDisplayedItems] = useState(itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(0);
 
   //sorting logic
   const handleSort = (column) => {
@@ -69,9 +70,25 @@ const [displayedItems, setDisplayedItems] = useState(itemsPerPage);
   });
   //handle pagination
   const handleLoadMore = () => {
-    setDisplayedItems((prevDisplayedItems) => prevDisplayedItems + itemsPerPage);
+    setDisplayedItems((prevDisplayedItems) => {
+      if (ticket.length > prevDisplayedItems) {
+        return ticket.length - (prevDisplayedItems + itemsPerPage) > 0
+          ? prevDisplayedItems + itemsPerPage
+          : ticket.length;
+      } else {
+        return itemsPerPage;
+      }
+    }); // to set table ending point
+
+    setCurrentPage((prevDisplayedItems) => {
+      if (ticket.length - itemsPerPage >= prevDisplayedItems) {
+        return prevDisplayedItems + itemsPerPage;
+      } else {
+        return 0;
+      }
+    }); //to set table starting point
   };
-  
+
 
   return (
     <div className="conversation-start">
@@ -80,7 +97,9 @@ const [displayedItems, setDisplayedItems] = useState(itemsPerPage);
         <div className="conversation-filters">
           {/* Search bar */}
           <h1 className="conversation-filters-title">
-            showing result 15 of {ticket.length}
+            showing result{" "}
+            {displayedItems < ticket.length ? displayedItems : ticket.length} of{" "}
+            {ticket.length}
           </h1>
           <input type="text" placeholder="Search " />
 
@@ -263,44 +282,52 @@ const [displayedItems, setDisplayedItems] = useState(itemsPerPage);
             </tr>
           </thead>
           <tbody>
-            {sortedTicket.slice(0, displayedItems).map((conversation) => (
-              <tr
-                className="conversation-line-table-body-item-card"
-                key={conversation.ticketId}
-              >
-                <td className="conversation-line-table-body-item">
-                  {conversation.customer}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.email}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.ticketId}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.requestType}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.requestedDate}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.priority}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.status}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.channel}
-                </td>
-                <td className="conversation-line-table-body-item">
-                  {conversation.totalOrders}
-                </td>
-              </tr>
-            ))}
+            {sortedTicket
+              .slice(currentPage, displayedItems)
+              .map((conversation) => (
+                <tr
+                  className="conversation-line-table-body-item-card"
+                  key={conversation.ticketId}
+                >
+                  <td className="conversation-line-table-body-item">
+                    {conversation.customer}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.email}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.ticketId}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.requestType}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.requestedDate}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.priority}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.status}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.channel}
+                  </td>
+                  <td className="conversation-line-table-body-item">
+                    {conversation.totalOrders}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
         <div className="conversation-line-items-table-pagination-load-more-button">
-          <button className="load-more-button" onClick={handleLoadMore} disabled={displayedItems >= sortedTicket.length}>LOAD MORE</button>
+          <button
+            className="load-more-button"
+            onClick={handleLoadMore}
+            // disabled={displayedItems >= sortedTicket.length}
+          >
+            LOAD MORE
+          </button>
         </div>
       </div>
 
