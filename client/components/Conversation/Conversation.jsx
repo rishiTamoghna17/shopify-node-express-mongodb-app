@@ -127,7 +127,7 @@ function Conversation() {
         <table className="conversation-line-items-table" >
           <thead>
             <tr className="conversation-line-item-header">
-              <th>
+              <th className = "conversarion-line-item-th">
                 Customer
                 <span
                   className="sort-arrow"
@@ -139,7 +139,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Email
                 <span
                   className="sort-arrow"
@@ -152,7 +152,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Ticket ID
                 <span
                   className="sort-arrow"
@@ -164,7 +164,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Request Type
                 <span
                   className="sort-arrow"
@@ -176,7 +176,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Requested Date
                 <span
                   className="sort-arrow"
@@ -188,7 +188,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Priority
                 <span
                   className="sort-arrow"
@@ -200,7 +200,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Status
                 <span
                   className="sort-arrow"
@@ -212,7 +212,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Channel
                 <span
                   className="sort-arrow"
@@ -224,7 +224,7 @@ function Conversation() {
                   />
                 </span>
               </th>
-              <th>
+              <th className = "conversarion-line-item-th">
                 Total Orders
                 <span
                   className="sort-arrow"

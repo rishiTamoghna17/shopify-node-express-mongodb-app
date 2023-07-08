@@ -52,13 +52,14 @@
 
 .conversation-filters select {
   padding: 4px;
-  /* border: 1px solid #ccc; */
+  border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 20px;
   width: 100px;
   color: #fff;
   background-color: rgba(78, 77, 77, 0.712);
 }
+
 
 /* Additional styles for the select dropdown arrow */
 .conversation-filters select::after {
@@ -87,6 +88,7 @@
   width: 100%;
   border: 1px solid #cccccc38;
   border-radius: 10px;
+  border: 1px solid rgb(255, 255, 255);
 }
 /* sort icon */
 .sort-icon {
@@ -96,9 +98,11 @@
 }
 
 .conversation-line-item-header {
-  background-color: rgba(78, 77, 77, 0.712);
   font-weight: bold;
   color: #fff;
+}
+.conversarion-line-item-th{
+  background-color: rgba(78, 77, 77, 0.712);
 }
 
 .conversation-line-item-header th {
