@@ -27,6 +27,10 @@ export default function App() {
               destination: "/tickets"
             },
             {
+              label: "default",
+              destination: "/default"
+            },
+            {
               label: "Fetch Data",
               destination: "/debug/getData",
             },

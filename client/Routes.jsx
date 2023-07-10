@@ -8,6 +8,7 @@ import DevNotes from "./pages/debugCards/DevNotes";
 import GetData from "./pages/debugCards/GetData";
 import Index from "./pages/Index";
 import Ticket from "./pages/TicketsPage/ticketPage"
+import Default from "./pages/DefaultPAge/default"
 
 const routes = {
   "/": () => <Index />,
@@ -20,6 +21,7 @@ const routes = {
   "/debug/getData": () => <GetData />,
   "/debug/billing": () => <BillingAPI />,
   "/debug/devNotes": () => <DevNotes />,
+  "/default": () => <Default />,
   //Add your routes here
 };
 

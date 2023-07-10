@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { dummyTicket } from "../../assets/dummydata.js";
 import { BiSolidSortAlt } from "react-icons/bi";
+import { AiOutlineCheckCircle, AiOutlineSync } from "react-icons/ai";
+import { BsClockHistory } from "react-icons/bs";
 import "./Conversation.css";
 
 function Conversation() {
@@ -82,6 +84,21 @@ function Conversation() {
     }); //to set table starting point
   };
 
+  //get status icon
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case "Close/Completed":
+        return <AiOutlineCheckCircle color="green" />;
+      case "Route/In-progress":
+      case "Route/Pending":
+        return <AiOutlineSync color="red" />;
+      case "In-progress":
+        return <BsClockHistory color="blue" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="conversation-start">
       <div className="conversation-heading">
@@ -124,116 +141,88 @@ function Conversation() {
 
       {/* Conversation line items */}
       <div className="table-card">
-        <table className="conversation-line-items-table" >
+        <table className="conversation-line-items-table">
           <thead>
             <tr className="conversation-line-item-header">
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Customer
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Customer")}
                 >
-                  <BiSolidSortAlt className="sort-icon"
-                    color="white"
-                    
-                  />
+                  <BiSolidSortAlt className="sort-icon" color="white" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Email
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Email")}
                 >
-                  <BiSolidSortAlt 
-                  className="sort-icon"
-                    color="white"
-                    
-                  />
+                  <BiSolidSortAlt className="sort-icon" color="white" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Ticket ID
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Ticket ID")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Request Type
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Request Type")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Requested Date
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Requested Date")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Priority
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Priority")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Status
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Status")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Channel
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Channel")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
-              <th className = "conversarion-line-item-th">
+              <th className="conversarion-line-item-th">
                 Total Orders
                 <span
                   className="sort-arrow"
                   onClick={() => handleSort("Total Orders")}
                 >
-                  <BiSolidSortAlt
-                    color="white"
-                    className="sort-icon"
-                  />
+                  <BiSolidSortAlt color="white" className="sort-icon" />
                 </span>
               </th>
             </tr>
@@ -265,7 +254,7 @@ function Conversation() {
                     {conversation.priority}
                   </td>
                   <td className="conversation-line-table-body-item">
-                    {conversation.status}
+                    {getStatusIcon(conversation.status)}{"   "}{conversation.status}
                   </td>
                   <td className="conversation-line-table-body-item">
                     {conversation.channel}

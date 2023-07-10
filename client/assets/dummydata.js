@@ -792,3 +792,35 @@ export const dummyTicket = [
       totalOrders: 8,
     }
   ];
+
+  export const conversations = [
+    {
+      id: 1,
+      title: 'Question about product',
+      details: 'Hi, I have a question about your product. Can you help me?',
+      time: '10:30 AM',
+      supportType: 'Sales',
+      supportIcon: 'Sales',
+      isFavorite: false,
+    },
+    {
+      id: 2,
+      title: 'Issue with order',
+      details: 'Hello, I recently placed an order and there seems to be an issue with the delivery. Can you please assist?',
+      time: '11:15 AM',
+      supportType: 'Customer Support',
+      supportIcon: 'Support',
+      isFavorite: true,
+    },
+    {
+      id: 3,
+      title: 'Feedback on service',
+      details: 'Hi, I wanted to share my feedback on the service I received from your team. Is there a way to provide feedback?',
+      time: '12:45 PM',
+      supportType: 'Customer Feedback',
+      supportIcon: 'Feedback',
+      isFavorite: false,
+    },
+    
+  ];
+  
