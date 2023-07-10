@@ -30,7 +30,7 @@ const ConversationScreen = (props) => {
             </select>
 
             {/* Refresh button */}
-            <button className="refresh-button">
+            <button className="conversation-header-refresh-button">
               <BiRefresh size={20} color = "white" />
             </button>
 
