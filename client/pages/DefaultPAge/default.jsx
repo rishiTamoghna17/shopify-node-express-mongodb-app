@@ -6,9 +6,10 @@ import { BiLogoWindows } from "react-icons/bi";
 import ConversationScreen from "../../components/ConversationScreen/ConversationScreen";
 import { conversations } from "../../assets/dummydata";
 import ConversationScreenWithhoutLogIn from "../../components/ConversationScreenWithhoutLogIn/ConversationScreenWithhoutLogIn";
+import AISection from "../../components/AiChatWithOutLogin/AiChat";
 
 function defaultPAge() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <Page>
       <div>
@@ -25,6 +26,10 @@ function defaultPAge() {
             section1="10%"
           />:<ConversationScreenWithhoutLogIn width="20%"
           section1="10%"/>}
+        </section>
+        
+        <section className="section-aisection">
+        {isLogin===true?<ConversationScreenWithhoutLogIn width="50%" section2="30%"/>:<AISection width="50%" section2="30%"/>}
         </section>
       </div>
     </Page>

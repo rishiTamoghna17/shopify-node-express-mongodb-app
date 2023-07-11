@@ -34,6 +34,7 @@
   width: 100%;
   background-color: rgba(78, 77, 77, 0.712);
   color: white;
+  border: none;
 }
 
 .search-bar input[type="text"]::placeholder {
@@ -41,6 +42,7 @@
   padding-left: 40px;
   background-repeat: no-repeat;
   background-position: 10px center;
+  border: none;
 }
 
 .conversation-header-row {

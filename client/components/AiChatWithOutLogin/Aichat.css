@@ -1,0 +1,205 @@
+.ai-section {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: black;
+  transition: 0.5s ease;
+  overflow-x: hidden;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+  height: 100%;
+}
+
+.ai-section-header {
+  display: flex;
+  align-items: center;
+  /* background-color: lightblue; */
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.ai-section-header-title {
+  margin-left: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  font-family: roboto;
+  /* margin-right: 10px; */
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* margin-bottom: 20px; */
+  /* background-color: lightcoral; */
+  margin-right: 10px;
+}
+
+.category-buttons button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+}
+
+.main-category {
+  display: flex;
+  align-items: center;
+  padding: 10px 5px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  /* overflow-x: hidden; */
+  /* flex-wrap: nowrap; */
+  /* overflow-x: auto; */
+  /* overflow-y: 'scroll', */
+}
+.main-categories {
+  display: flex;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  animation: rotateCategories 12s linear infinite;
+  /* background-color: blue; */
+}
+
+/* @keyframes rotateCategories {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+} */
+
+.main-category-text {
+  display: flex;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 100%;
+  width: 150px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s;
+}
+.main-category-text {
+  margin-left: 20px;
+  text-align: center;
+}
+
+.main-category-text.active {
+  background-color: red; /* Update with your desired active category background color */
+}
+
+.main-category-icon {
+  margin-right: 10px;
+  align-items: center;
+  display: flex;
+}
+
+
+.subcategories {
+  display: flex;
+  padding: 5px 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.subcategory {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.subcategory-icon {
+  margin-right: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10%;
+  padding: 5px 10px;
+  display: flex;
+}
+
+.prompts {
+  /* display: flex; */
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  /* width: 200px; */
+}
+
+.prompt-icon {
+  margin-right: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10%;
+  padding: 5px 10px;
+  display: flex;
+}
+
+.default-text {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.prompt-input-form-contain {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  justify-content: space-between;
+  width: 90%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.prompt-input {
+  width: 100%;
+}
+
+.prompt-input input[type="text"] {
+  background-color: transparent ;
+  padding: 10px;
+  width: 80%;
+  margin-left: 10px;
+  border: none ;
+  color:white
+}
+
+.prompt-input button {
+  background-color: transparent ;
+  border: none;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 60px;
+}
+
