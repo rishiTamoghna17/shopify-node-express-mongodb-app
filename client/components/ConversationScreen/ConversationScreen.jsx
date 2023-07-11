@@ -21,7 +21,7 @@ const ConversationScreen = (props) => {
           />
         </div>
         <div className="conversation-header-row">
-          <div className="conversation-header">
+          <div className="conversation-header-dropdown">
             {/* Conversation status dropdown */}
             <select>
               <option value="">All</option>
@@ -30,6 +30,7 @@ const ConversationScreen = (props) => {
             </select>
 
             {/* Refresh button */}
+            <div className="conversation-header-refresh-button-edit">
             <button className="conversation-header-refresh-button">
               <BiRefresh size={20} color = "white" />
             </button>
@@ -38,6 +39,7 @@ const ConversationScreen = (props) => {
             <button className="filter-button">
               <FiFilter size={20} color = "white" />
             </button>
+            </div>
           </div>
         </div>
 

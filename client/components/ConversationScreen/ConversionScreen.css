@@ -50,13 +50,54 @@
   padding-top: 20px;
   width: 100%;
   padding: 0 10px;
+  flex-direction: column;
+}
+.conversation-header-dropdown {
+  display: flex;
+  align-items: center;
+  
 }
 
+.conversation-header-dropdown select{
+  margin-left: 10px;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 20px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='18px' height='18px'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 18px 18px;
+}
+.conversation-header-dropdown button {
+  margin-right: 10px;
+}
+
+.conversation-header-dropdown select::-ms-expand {
+  display: none;
+}
+
+.conversation-header-refresh-button-edit{
+  display: flex;
+}
 .conversation-header-refresh-button,
 .filter-button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 5px; 
+  transition: background-color 0.3s ease;
+}
+
+.conversation-header-refresh-button:hover,
+.filter-button:hover {
+  opacity: 0.8;
 }
 
 .conversation-list {
