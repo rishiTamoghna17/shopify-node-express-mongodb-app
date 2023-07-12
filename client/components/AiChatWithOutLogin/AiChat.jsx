@@ -51,12 +51,16 @@ const AISection = (props) => {
   };
 
   const handlePromptSubmit = (e) => {
-    e.preventDefault();
-    if(promptText.trim() !== '') {
-    setShowDefaultText(false);
+    try {
+      e.preventDefault();
+      if (promptText.trim() !== "") {
+        setShowDefaultText(false);
+      }
+      // Process the entered prompt text
+      // ...
+    } catch (error) {
+      console.log(error);
     }
-    // Process the entered prompt text
-    // ...
   };
 
   return (
@@ -132,33 +136,27 @@ const AISection = (props) => {
             ))}
           </section>
         </>
-      ): (
+      ) : (
         <section className="prompts">
-          
-              <div  className="prompt">
-                <div className="prompt-icon">
-                  <CiPaperplane color="white" size={15} />
-                </div>
-                <div className="prompt-text">
-                {promptText}
-                </div>
-              </div>
-          
-          </section>
+          <div className="prompt">
+            <div className="prompt-icon">
+              <CiPaperplane color="white" size={15} />
+            </div>
+            <div className="prompt-text">{promptText}</div>
+          </div>
+        </section>
       )}
-
-
-      <div className="default-text">Type and enter your problem</div>
-      <div className="prompt-input-form-contain">
-        <form onSubmit={handlePromptSubmit} className="prompt-input">
-          <input
-            type="text"
-            value={promptText}
-            onChange={(e) => setPromptText(e.target.value)}
-            placeholder="Enter your problem"
-          />
-          <button type="submit">Submit</button>
-        </form>
+        <div className="default-text">Type and enter your problem</div>
+        <div className="prompt-input-form-contain">
+          <form onSubmit={handlePromptSubmit} className="prompt-input">
+            <input
+              type="text"
+              value={promptText}
+              onChange={(e) => setPromptText(e.target.value)}
+              placeholder="Enter your problem"
+            />
+            <button type="submit">Submit</button>
+          </form>
       </div>
     </div>
   );

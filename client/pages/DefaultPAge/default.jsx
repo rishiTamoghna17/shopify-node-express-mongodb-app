@@ -7,9 +7,10 @@ import ConversationScreen from "../../components/ConversationScreen/Conversation
 import { conversations } from "../../assets/dummydata";
 import ConversationScreenWithhoutLogIn from "../../components/ConversationScreenWithhoutLogIn/ConversationScreenWithhoutLogIn";
 import AISection from "../../components/AiChatWithOutLogin/AiChat";
+import LoggedInAiChat from "../../components/AiChat/LoggedInAiChat";
 
 function defaultPAge() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <Page>
       <div>
@@ -29,7 +30,7 @@ function defaultPAge() {
         </section>
         
         <section className="section-aisection">
-        {isLogin===true?<ConversationScreenWithhoutLogIn width="50%" section2="30%"/>:<AISection width="50%" section2="30%"/>}
+        {isLogin===true?<LoggedInAiChat width="50%" section2="30%"/>:<AISection width="50%" section2="30%"/>}
         </section>
       </div>
     </Page>
