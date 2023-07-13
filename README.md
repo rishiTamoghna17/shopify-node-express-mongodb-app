@@ -43,3 +43,17 @@ The Shopify CLI generates an amazing starter app but it still needs some more bo
 
 - Storing data is kept to a minimal to allow building custom models for flexibility.
   - Session persistence is also kept to a minimal and based on the Redis example provided by Shopify, but feel free to modify as required.
+
+
+
+
+
+SHOPIFY_API_KEY=7b7274195e893cc66728d24439275621
+SHOPIFY_API_SECRET=3b0bd4f6e79bb56be066f999ba342965
+SHOPIFY_API_SCOPES=read_content, write_content
+SHOPIFY_APP_URL=https://d7d2-103-251-17-93.ngrok-free.app
+SHOPIFY_API_VERSION="2023-04"
+MONGO_URL= "mongodb://mongo:4cUZODmtdYJWuLtC6NLR@containers-us-west-69.railway.app:7048"
+ENCRYPTION_STRING=ENCRYPTION_STRING
+NPM_CONFIG_FORCE=true
+

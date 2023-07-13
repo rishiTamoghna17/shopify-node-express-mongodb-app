@@ -1,0 +1,143 @@
+
+  .notification-header {
+    display: flex;
+    /* justify-content: space-between; */
+  
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: transparent;
+    width: 100%;
+    height: 40%;
+  }
+  
+  .notifications-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    width: 100%;
+    /* background-color: yellow; */
+  }
+  
+  .notifications-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .toggle-label {
+    margin-left: 5px;
+    font-size: medium;
+  }
+  
+  .notification-nav-icon {
+    display: flex;
+  }
+  
+  .notification-icon {
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  /* .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    display: inline-block;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 50%;
+  } */
+  
+  .link-icon {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: blue;     */
+    width: 100%;
+  }
+  
+  .assignee-details {
+    position: relative;
+    display: flex;
+    /* margin-left: 5px; */
+    padding: 5px 10px;
+    align-items: center;
+    font-size: large;
+    width: 100%;
+    /* background-color: red; */
+    margin-bottom: 5px;
+  }
+  
+  .profile-section-assign-card {
+    display: flex;
+    padding: 5px 10px;
+    background-color: black;
+    width: 90%;
+    border-radius: 5px;
+    flex-direction: row;
+  }
+  
+  .profile-section-assignee-name-status {
+    margin-left: 10px;
+  }
+  .profile-section-assignee-status {
+    display: flex;
+  }
+  
+  .profile-section-assignee-status-status {
+    margin-right: 10px;
+  }
+  
+  .profile-section-assignee-status-active::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+  
+  .profile-section-assignee-status-deactive::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+  
+  .profile-section-assignee-status-link-icon {
+    position: fixed;
+    right: 20px;
+  }
+  
+  .profile-section-ai-merchant-logo {
+    display: flex;
+    align-items: center;
+    width: 90%;
+  
+    bottom: 25px;
+    margin-top: 10px;
+  }
+  
+  .merchant-logo-image {
+    width: 100%;
+    height: 150px;
+    border-radius: 5px;
+  }
