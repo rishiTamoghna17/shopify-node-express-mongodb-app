@@ -63,6 +63,12 @@ const AISection = (props) => {
     }
   };
 
+  function handleKeyDown(event) {
+    if (event.keyCode === 13) {
+      handlePromptSubmit(event);
+    }
+  }
+
   return (
     <div
       className="ai-section"
@@ -154,6 +160,7 @@ const AISection = (props) => {
               value={promptText}
               onChange={(e) => setPromptText(e.target.value)}
               placeholder="Enter your problem"
+              onKeyDown={handleKeyDown}
             />
             <button type="submit">Submit</button>
           </form>
