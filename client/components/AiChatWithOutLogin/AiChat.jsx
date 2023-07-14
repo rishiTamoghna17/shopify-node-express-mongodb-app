@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { categorys } from "../../assets/dummydata";
-import { TiMessage } from "react-icons/ti";
+import { BiSend } from "react-icons/bi";
 import { AiOutlineMessage } from "react-icons/ai";
 import { CiPaperplane } from "react-icons/ci";
 import "./Aichat.css";
@@ -55,6 +55,7 @@ const AISection = (props) => {
       e.preventDefault();
       if (promptText.trim() !== "") {
         setShowDefaultText(false);
+        setPromptText("");
       }
       // Process the entered prompt text
       // ...
@@ -152,19 +153,21 @@ const AISection = (props) => {
           </div>
         </section>
       )}
-        <div className="default-text">Type and enter your problem</div>
-        <div className="prompt-input-form-contain">
-          <form onSubmit={handlePromptSubmit} className="prompt-input">
+        {/* <div className="default-text">Type and enter your problem</div> */}
+          <div  className="chat-input">
             <input
               type="text"
               value={promptText}
               onChange={(e) => setPromptText(e.target.value)}
               placeholder="Enter your problem"
               onKeyDown={handleKeyDown}
+              className="message-input"
             />
-            <button type="submit">Submit</button>
-          </form>
-      </div>
+            <button onClick={handlePromptSubmit} className="send-button">
+          <BiSend size={20} color="red" />
+        </button>
+          </div>
+
     </div>
   );
 };

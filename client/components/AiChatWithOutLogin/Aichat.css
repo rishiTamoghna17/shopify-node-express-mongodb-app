@@ -170,44 +170,38 @@
   color: white;
 }
 
-.prompt-input-form-contain {
+.chat-input {
   display: flex;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
-  justify-content: space-between;
-  width: 90%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  align-items: center;
+  width: 95%;
+  position: absolute;
+  padding: 10px 10px;
   border-radius: 10px;
+  bottom: 25px;
 }
 
-.prompt-input {
-  width: 100%;
-
-}
-
-.prompt-input input[type="text"] {
-  background-color: transparent ;
-  padding: 10px;
-  width: 80%;
-  margin-left: 10px;
-  border: none ;
-  color:white
-  
-}
-
-.prompt-input button {
-  background-color: transparent ;
+.message-input {
+  flex-grow: 1;
+  padding: 5px;
   border: none;
-  color: white;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 60px;
+  border-radius: 4px;
+  background-color: transparent;
+  color:white;
+  border: none;
 }
+
+.send-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+
 
 
 

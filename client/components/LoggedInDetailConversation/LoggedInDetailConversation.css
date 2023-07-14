@@ -14,7 +14,147 @@
   color: white;
 }
 
-.container {
+.loggedin-detail-conversation-support-request{
+  /* background-color: lightslategray; */
+  width: 100%;
+  height: 50%;
+  position: relative;
+}
+
+.loggedin-detail-conversation-support-request-title{
+  /* background-color: lightcoral; */
+  padding: 5px 10px;
+  color: white;
+  align-items: center;
+  margin-left: 5px;
+}
+h1{
+  font-size:large;
+  font-weight: bold;
+}
+
+.loggedin-detail-conversation-support-request-log{
+  padding: 5px 10px;
+  /* background-color: lightgray; */
+  /* margin-left: 5px; */
+}
+
+.detail-conversation-support-request-type-status{
+  display:flex;
+  position: relative;
+  /* background-color: gray; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-conversation-support-request-type{
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.detail-conversation-support-request-type-icon-one{
+  margin-right: 5px;
+  align-items: center;
+  
+  margin-top: 5px;
+}
+.detail-conversation-support-request-response{
+  margin-left: 15px;
+  /* background-color: grey; */
+}
+
+h2{
+  color:red;
+  font-size: small;
+}
+p{
+  font-size: smaller;
+}
+
+.detail-conversation-support-request-type-icon-two {
+  display:flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.detail-conversation-support-request-response{
+  margin-left: 15px;
+  
+}
+
+
+
+.loggedin-detail-conversation-support-conversation-members{
+  display: flex;
+  position: relative;
+  padding: 5px 10px;
+  width: 100%;
+  height:50%;
+  /* background-color: lavender; */
+  flex-direction: column;
+}
+
+.loggedin-detail-conversation-support-conversation-members-title{
+  display: flex;
+  margin-left: 5px;
+}
+
+.loggedin-detail-conversation-support-conversation-align{
+  display: flex;
+  align-items: center;
+  /* background: #000; */
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.loggedin-detail-conversation-support-conversation-members-member-map{
+  display: flex;
+  position: relative;
+  margin-left: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #000; */
+  margin-top: 5px;
+  width: 100%;
+}
+
+.loggedin-detail-conversation-support-conversation-members-member-icon-name-agent{
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  /* background: lightgreen; */
+  width:100%;
+  margin-bottom: 5px;
+}
+
+.loggedin-detail-conversation-support-conversation-members-name-agent{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.loggedin-detail-conversation-support-conversation-members-name{
+font-size: medium;
+}
+
+.loggedin-detail-conversation-support-conversation-members-name {
+  font-size: small;
+}
+
+.loggedin-detail-conversation-support-conversation-members-member-status-active {
+ display: flex;
+ position: fixed;
+ right: 20px;
+}
+
+
+/* .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -60,4 +200,4 @@
     border: none;
     border-top: 1px solid #ccc;
   }
-  
+   */
