@@ -22,16 +22,22 @@
 }
 
 .conversation-header-convo {
+  display:flex;
   width: 95%;
+  /* height: 70px; */
+  padding: 5px 10px;
+  align-items: center;
   margin-bottom: 15px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-left: 10px;
   margin-right: 10px;
   color: white;
   background-color: black;
 }
 .conversation-header-convo-content {
+  display: flex;
   padding: 10px 20px;
+  font-size: small;
 }
 /* footer button */
 .conversation-footer {
@@ -41,34 +47,4 @@
   justify-content: center;
 }
 
-.conversation-footer-button-cls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  width: 100%;
-  margin-left: 10px;
-}
 
-.refresh-button {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.refresh-button:hover {
-  background-color: darkred;
-}
-
-.refresh-button svg {
-  margin-right: 10px;
-}

@@ -1,6 +1,6 @@
 import React from "react";
 import "./ConversationScreenWithhoutLogIn.css";
-import { TiMessage } from "react-icons/ti";
+import NewRequestButton from "../NewRequestButton/NewRequestButton";
 function ConversationScreenWithhoutLogIn(props) {
   return (
     <div
@@ -31,11 +31,7 @@ function ConversationScreenWithhoutLogIn(props) {
         </div>
       </div>
       <div className="conversation-footer">
-        <div className="conversation-footer-button-cls">
-        <button type="button" className="refresh-button">
-          {<TiMessage color="white" size="30px"/>}start new request 
-        </button>
-        </div>
+        <NewRequestButton/>
       </div>
     </div>
   );

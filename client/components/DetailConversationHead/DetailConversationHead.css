@@ -9,6 +9,7 @@
     background-color: transparent;
     width: 100%;
     height: 40%;
+    background-color: lightblue;
   }
   
   .notifications-section {
@@ -71,7 +72,7 @@
   .assignee-details {
     position: relative;
     display: flex;
-    /* margin-left: 5px; */
+    margin-left: 10px;
     padding: 5px 10px;
     align-items: center;
     font-size: large;
@@ -98,13 +99,18 @@
   
   .profile-section-assignee-status-status {
     margin-right: 10px;
+    font-size: small;
   }
   
+  .profile-section-assignee-status-active,.profile-section-assignee-status-deactive{
+    font-size: small;
+  }
+
   .profile-section-assignee-status-active::after {
     content: "";
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-color: green;
     border-radius: 50%;
     margin-left: 15px;

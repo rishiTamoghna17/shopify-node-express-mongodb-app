@@ -1,0 +1,33 @@
+.conversation-footer-button-cls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .refresh-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .refresh-button:hover {
+    background-color: darkred;
+  }
+  
+  .refresh-button svg {
+    margin-right: 10px;
+  }

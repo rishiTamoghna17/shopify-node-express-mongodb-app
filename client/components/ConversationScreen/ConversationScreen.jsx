@@ -5,6 +5,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { TiMessage } from "react-icons/ti";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./ConversionScreen.css";
+import NewRequestButton from "../NewRequestButton/NewRequestButton";
 
 const ConversationScreen = (props) => {
   return (
@@ -68,11 +69,7 @@ const ConversationScreen = (props) => {
         </div>
       </div>
       <div className="conversation-footer">
-        <div className="conversation-footer-button-cls">
-          <button type="button" className="refresh-button">
-            {<TiMessage color="white" size="30px" />}start new request
-          </button>
-        </div>
+        <NewRequestButton/>
       </div>
     </div>
   );
