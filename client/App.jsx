@@ -31,6 +31,10 @@ export default function App() {
               destination: "/default"
             },
             {
+              label: "Login",
+              destination: "/login",
+            },
+            {
               label: "Fetch Data",
               destination: "/debug/getData",
             },

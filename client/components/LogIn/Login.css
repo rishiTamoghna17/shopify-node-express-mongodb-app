@@ -1,0 +1,130 @@
+.model-wrapper{
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.753);
+}
+
+.login-cross-btn{
+  position: fixed;
+  color: white;
+  font-weight: bolder;
+  right:10%;
+  top:10%;
+  font-size:larger;
+  cursor:pointer;
+}
+
+.model-container{
+  display: flex;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.login-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  /* background-color: lightseagreen; */
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+}
+
+.login-title{
+  /* text-align: center; */
+  margin-left: 5px;
+  margin-bottom: 5px;
+  font-size: small;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color:white
+}
+
+.input-wrapper{
+  align-items: center;
+  /* background-color: lightblue; */
+  position: relative;
+}
+
+.login-form {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.login-input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  /* border: 1px solid #ccc; */
+  background-color: rgba(71, 70, 70, 0.89);
+  border: none;
+  width: 23vh;
+  width: 100%;
+  
+}
+
+.email-icon{
+  position: absolute;
+  right:3%;
+  align-items: center;
+  margin-top: 10px;
+}
+
+::placeholder { 
+  color: rgba(255, 255, 255, 0.582);
+  background-color: transparent;
+  opacity: 1; 
+  border: none;
+  font-weight: bold;
+
+}
+
+.login-btn-submit {
+  text-align:start;
+  font-weight: bold;
+  padding: 10px;
+  background-color: white;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color:black;
+  width: 100%;
+}
+
+.login-btn-submit:hover {
+  background-color: whitesmoke;
+}
+
+.login-register-btn{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color:white;
+  width: 23vh;  
+  margin-left: 5px;
+}
+
+.register-btn-under-login{
+  color:white;
+  margin-right: 5px;
+}
+
+

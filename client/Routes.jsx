@@ -9,10 +9,13 @@ import GetData from "./pages/debugCards/GetData";
 import Index from "./pages/Index";
 import Ticket from "./pages/TicketsPage/ticketPage"
 import Default from "./pages/DefaultPAge/default"
+import Login from "./pages/logIn/logIn"
 
 const routes = {
   "/": () => <Index />,
   "/tickets": () => <Ticket/>,
+  "/default": () => <Default />,
+  "/login":() => <Login/>,
   "/exitframe": () => <ExitFrame />,
   "/exitframe/:shop": ({ shop }) => <ExitFrame shop={shop} />,
   //Debug Cards
@@ -21,7 +24,6 @@ const routes = {
   "/debug/getData": () => <GetData />,
   "/debug/billing": () => <BillingAPI />,
   "/debug/devNotes": () => <DevNotes />,
-  "/default": () => <Default />,
   //Add your routes here
 };
 
