@@ -10,7 +10,12 @@ import Ticket from "../components/TIckerCountDashBoard/Ticket";
 const HomePage = () => {
   return (
     <Page fullWidth>
-      <Navbar />
+      <div style={{ position: "absolute",
+  left:0,
+  right:0,
+  top:0,
+  bottom: 0.}}>
+      <Navbar title = "Analytics"/>
       <Ticket graph />
       <Automation
         heading
@@ -27,7 +32,9 @@ const HomePage = () => {
         CurrentAutomationQueueCard
         MostSupportRequestHoursCard
         TopSupportRequestCategoriesCard
+        style ={{display: 'flex',bottom: '500px',position: 'fixed'}}
       />
+      </div>
     </Page>
   );
 };

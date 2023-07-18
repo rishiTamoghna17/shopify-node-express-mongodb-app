@@ -168,12 +168,15 @@
   background-color: transparent;
   color:white;
   border: none;
+  outline: none;
+
 }
 
 .send-button {
   margin-left: 10px;
   padding: 5px 10px;
   border: none;
+  outline: none;
   border-radius: 4px;
   background-color: transparent;
   color: #fff;

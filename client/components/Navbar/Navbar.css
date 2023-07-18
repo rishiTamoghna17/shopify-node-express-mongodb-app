@@ -21,9 +21,27 @@
   align-items: center;
 }
 
+.nav-bar-button-expand {
+  display: flex;
+  align-items: center;
+}
+
+
 .button-storeName {
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
+  /* padding: 5px; */
+  cursor:pointer;
+  margin-left: 10px;
+  
+  /* background-color: red; */
+}
+
+.nav-bar-expand-button{
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  cursor:pointer;
 }
 
 .profile-icon {
@@ -35,5 +53,5 @@
 }
 .organization {
   color: white;
-  margin-right: 10px;
+  
 }

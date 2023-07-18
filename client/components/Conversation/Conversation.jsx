@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { dummyTicket } from "../../assets/dummydata.js";
-import { BiSolidSortAlt } from "react-icons/bi";
-import { AiOutlineCheckCircle, AiOutlineSync } from "react-icons/ai";
+import { BiSolidSortAlt, BiSearch } from "react-icons/bi";
+import {
+  AiOutlineCheckCircle,
+  AiOutlineSync,
+  AiOutlineInfoCircle,
+} from "react-icons/ai";
+import { MdOutlineSort } from "react-icons/md";
+import { RiCheckboxMultipleLine } from "react-icons/ri";
 import { BsClockHistory } from "react-icons/bs";
 import "./Conversation.css";
 
@@ -110,162 +116,251 @@ function Conversation() {
             {displayedItems < ticket.length ? displayedItems : ticket.length} of{" "}
             {ticket.length}
           </h1>
-          <input type="text" placeholder="Search " />
+          <div className="conversation-filters-search-bar">
+            <icon>
+              <BiSearch size={15} color="white" />
+            </icon>
+            <input type="text" placeholder="Search " />
+          </div>
 
           {/* Status filter */}
-          <select>
-            <option value="">All Status</option>
-            <option value="completed">Close/Completed</option>
-            <option value="inProgress">In-progress</option>
-            <option value="routedPending">Route/Pending</option>
-            <option value="routedInProgress">Route/In-progress</option>
-          </select>
+          <div className="conversation-filters-status-bar">
+            <icon>
+              <AiOutlineInfoCircle size={15} color="white" />
+            </icon>
+            <select>
+              <option
+                className="conversation-filters-status-bar-option"
+                value=""
+              >
+                All Status
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="completed"
+              >
+                Close/Completed
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="inProgress"
+              >
+                In-progress
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="routedPending"
+              >
+                Route/Pending
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="routedInProgress"
+              >
+                Route/In-progress
+              </option>
+            </select>
+          </div>
 
           {/* Type filter */}
-          <select>
-            <option value="">All Types</option>
-            <option value="orderStatus">Order Status</option>
-            <option value="productSuggestions">Product Suggestions</option>
-            <option value="articles">Articles/FAQ/Help Center</option>
-          </select>
+          <div className="conversation-filters-status-bar">
+            <icon>
+              <RiCheckboxMultipleLine size={15} color="white" />
+            </icon>
+            <select>
+              <option
+                className="conversation-filters-status-bar-option"
+                value=""
+              >
+                All Types
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="orderStatus"
+              >
+                Order Status
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="productSuggestions"
+              >
+                Product Suggestions
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="articles"
+              >
+                Articles/FAQ/Help Center
+              </option>
+            </select>
+          </div>
 
           {/* Sort by filter */}
-          <select>
-            <option value="">Sort by</option>
-            <option value="requestedDateAsc">Requested Date </option>
-            <option value="customerNameAsc">Customer Name </option>
-            <option value="totalOrdersDesc">Total Orders </option>
-          </select>
+          <div className="conversation-filters-status-bar">
+            <icon>
+              <MdOutlineSort size={15} color="white" />
+            </icon>
+            <select>
+              <option
+                className="conversation-filters-status-bar-option"
+                value=""
+              >
+                Sort by
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="requestedDateAsc"
+              >
+                Requested Date{" "}
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="customerNameAsc"
+              >
+                Customer Name{" "}
+              </option>
+              <option
+                className="conversation-filters-status-bar-option"
+                value="totalOrdersDesc"
+              >
+                Total Orders{" "}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
 
       {/* Conversation line items */}
       <div className="table-card">
-        <table className="conversation-line-items-table">
-          <thead>
-            <tr className="conversation-line-item-header">
-              <th className="conversarion-line-item-th">
-                Customer
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Customer")}
-                >
-                  <BiSolidSortAlt className="sort-icon" color="white" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Email
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Email")}
-                >
-                  <BiSolidSortAlt className="sort-icon" color="white" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Ticket ID
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Ticket ID")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Request Type
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Request Type")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Requested Date
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Requested Date")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Priority
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Priority")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Status
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Status")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Channel
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Channel")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-              <th className="conversarion-line-item-th">
-                Total Orders
-                <span
-                  className="sort-arrow"
-                  onClick={() => handleSort("Total Orders")}
-                >
-                  <BiSolidSortAlt color="white" className="sort-icon" />
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedTicket
-              .slice(currentPage, displayedItems)
-              .map((conversation) => (
-                <tr
-                  className="conversation-line-table-body-item-card"
-                  key={conversation.ticketId}
-                >
-                  <td className="conversation-line-table-body-item">
-                    {conversation.customer}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.email}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.ticketId}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.requestType}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.requestedDate}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.priority}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {getStatusIcon(conversation.status)}{"   "}{conversation.status}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.channel}
-                  </td>
-                  <td className="conversation-line-table-body-item">
-                    {conversation.totalOrders}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <div className="conversation-line-items-table-div">
+          <table className="conversation-line-items-table">
+            <thead>
+              <tr className="conversation-line-item-header">
+                <th className="conversarion-line-item-th">
+                  Customer
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Customer")}
+                  >
+                    <BiSolidSortAlt className="sort-icon" color="white" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Email
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Email")}
+                  >
+                    <BiSolidSortAlt className="sort-icon" color="white" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Ticket ID
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Ticket ID")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Request Type
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Request Type")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Requested Date
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Requested Date")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Priority
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Priority")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Status
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Status")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Channel
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Channel")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+                <th className="conversarion-line-item-th">
+                  Total Orders
+                  <span
+                    className="sort-arrow"
+                    onClick={() => handleSort("Total Orders")}
+                  >
+                    <BiSolidSortAlt color="white" className="sort-icon" />
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedTicket
+                .slice(currentPage, displayedItems)
+                .map((conversation) => (
+                  <tr
+                    className="conversation-line-table-body-item-card"
+                    key={conversation.ticketId}
+                  >
+                    <td className="conversation-line-table-body-item">
+                      {conversation.customer}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.email}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.ticketId}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.requestType}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.requestedDate}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.priority}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {getStatusIcon(conversation.status)}
+                      {"   "}
+                      {conversation.status}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.channel}
+                    </td>
+                    <td className="conversation-line-table-body-item">
+                      {conversation.totalOrders}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
         <div className="conversation-line-items-table-pagination-load-more-button">
           <button
             className="load-more-button"

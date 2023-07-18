@@ -179,6 +179,7 @@
   padding: 10px 10px;
   border-radius: 10px;
   bottom: 25px;
+  outline: none;
 }
 
 .message-input {
@@ -189,6 +190,7 @@
   background-color: transparent;
   color:white;
   border: none;
+  outline: none;
 }
 
 .send-button {
