@@ -47,6 +47,7 @@ userRoutes.get('/api/tickets', async (req, res) => {
   }
 });
 
+//create zendesk ticket api
 
 
 
