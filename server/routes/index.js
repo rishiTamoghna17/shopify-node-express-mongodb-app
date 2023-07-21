@@ -2,6 +2,7 @@ import { Router } from "express";
 import clientProvider from "../../utils/clientProvider.js";
 import subscriptionRoute from "./recurringSubscriptions.js";
 import Ticket from "../../utils/models/TicketModel.js";
+import zd from "../libs/zendeskClient.js";
 
 const userRoutes = Router();
 userRoutes.use(subscriptionRoute);
@@ -48,8 +49,33 @@ userRoutes.get('/api/tickets', async (req, res) => {
 });
 
 //create zendesk ticket api
+userRoutes.post('/api/createZendeskTicket', (req, res) => {
 
+  const { subject, description, requesterName, requesterEmail } = req.body;
 
+  // Prepare the ticket data
+  const ticketData = {
+    ticket: {
+      subject,
+      description,
+      requester: {
+        name: requesterName,
+        email: requesterEmail,
+      },
+    },
+  };
+
+  // Create the ticket
+  zd.tickets.create(ticketData, (err, req, result) => {
+    if (err) {
+      console.error('Error creating Zendesk ticket:', err);
+      res.status(500).json({ error: 'Failed to create Zendesk ticket' });
+    } else {
+      // console.log('Zendesk ticket created:', result);
+      res.status(201).json({ success: true });
+    }
+  });
+});
 
 
 //****************************************************************//

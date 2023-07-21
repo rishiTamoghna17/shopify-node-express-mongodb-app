@@ -117,17 +117,17 @@ function Conversation() {
             {ticket.length}
           </h1>
           <div className="conversation-filters-search-bar">
-            <icon>
+            <i>
               <BiSearch size={15} color="white" />
-            </icon>
+            </i>
             <input type="text" placeholder="Search " />
           </div>
 
           {/* Status filter */}
           <div className="conversation-filters-status-bar">
-            <icon>
+            <i>
               <AiOutlineInfoCircle size={15} color="white" />
-            </icon>
+            </i>
             <select>
               <option
                 className="conversation-filters-status-bar-option"
@@ -164,9 +164,9 @@ function Conversation() {
 
           {/* Type filter */}
           <div className="conversation-filters-status-bar">
-            <icon>
+            <i>
               <RiCheckboxMultipleLine size={15} color="white" />
-            </icon>
+            </i>
             <select>
               <option
                 className="conversation-filters-status-bar-option"
@@ -197,9 +197,9 @@ function Conversation() {
 
           {/* Sort by filter */}
           <div className="conversation-filters-status-bar">
-            <icon>
+            <i>
               <MdOutlineSort size={15} color="white" />
-            </icon>
+            </i>
             <select>
               <option
                 className="conversation-filters-status-bar-option"

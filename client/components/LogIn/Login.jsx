@@ -31,21 +31,21 @@ function Login() {
             <form className="login-form">
               <div className="input-wrapper">
                 <input className="login-input" type="email" placeholder="Email" />
-                <icon className="email-icon">
+                <i className="email-icon">
                   <AiOutlineMail color="white" />
-                </icon>
+                </i>
               </div>
               <div className="input-wrapper">
                 <input className="login-input" type="password" placeholder="Password" />
-                <icon className="email-icon">
+                <i className="email-icon">
                   <BiSolidKey color="white" />
-                </icon>
+                </i>
               </div>
               <div className="input-wrapper">
                 <button className="login-btn-submit" type="submit">Login</button>
-                <icon className="email-icon">
+                <i className="email-icon">
                   <BiLogInCircle color="black" />
-                </icon>
+                </i>
               </div>
             </form>
             <div className="login-register-btn">
