@@ -953,7 +953,12 @@ export const categorys = [
         type: "Help Center",
         text: "access our comprehensive help center for assistance",
         icon: "Help icon",
-      },
+      },{
+        subCategoryId: 4,
+        type: "Help Center",
+        text: "access our comprehensive help center for assistance",
+        icon: "Help icon",
+      }
     ],
     prompt: [
       {

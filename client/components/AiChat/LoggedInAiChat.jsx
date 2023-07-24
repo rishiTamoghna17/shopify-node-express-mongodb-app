@@ -5,6 +5,7 @@ import { MdFavoriteBorder, MdReport } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
+import ChatInput from "../ChatInput/ChatInput";
 
 function LoggedInAiChat(props) {
   const [message, setMessage] = useState("");
@@ -36,8 +37,8 @@ function LoggedInAiChat(props) {
     }
   };
 
-  console.log(conversation);
-   
+  // console.log(conversation);
+
   const handleIconDropdownToggle = () => {
     setIconIsDropdownOpen(!iconIsDropdownOpen);
   };
@@ -54,12 +55,6 @@ function LoggedInAiChat(props) {
     e.preventDefault();
     setSelectedCustomer(e.target.value);
   };
-
-  function handleKeyDown(event) {
-    if (event.keyCode === 13) {
-      handleSendMessage(event);
-    }
-  }
 
   return (
     <div
@@ -179,19 +174,7 @@ function LoggedInAiChat(props) {
           </div>
         ))}
       </div>
-      <div className="chat-input">
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Write a message..."
-          className="message-input"
-        />
-        <button onClick={handleSendMessage} className="send-button">
-          <BiSend size={20} color="red" />
-        </button>
-      </div>
+      <ChatInput value = {message} handleSubmit = {handleSendMessage} onChange = {setMessage} />
     </div>
   );
 }

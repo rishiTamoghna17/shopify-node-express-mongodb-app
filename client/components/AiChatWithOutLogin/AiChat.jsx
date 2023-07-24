@@ -4,15 +4,18 @@ import { categorys } from "../../assets/dummydata";
 import { BiSend } from "react-icons/bi";
 import { AiOutlineMessage } from "react-icons/ai";
 import { CiPaperplane } from "react-icons/ci";
+import ChatInput from "../ChatInput/ChatInput";
 import "./Aichat.css";
+
 const AISection = (props) => {
   const mainCategories = categorys.map((category) => category.mainCategory);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [subCategories, setSubCategories] = useState([]);
   const [prompts, setPrompts] = useState([]);
   const [promptText, setPromptText] = useState("");
-
   const [showDefaultText, setShowDefaultText] = useState(true);
+  const [submittedPrompts, setSubmittedPrompts] = useState([]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCategoryIndex(
@@ -51,14 +54,15 @@ const AISection = (props) => {
   };
 
   const handlePromptSubmit = (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
+      const trimmedPrompt = promptText.trim();
+      console.log("Button clicked!");
       if (promptText.trim() !== "") {
         setShowDefaultText(false);
-        setPromptText("");
+        setSubmittedPrompts((prevPrompts) => [...prevPrompts, trimmedPrompt]);
       }
-      // Process the entered prompt text
-      // ...
+      setPromptText("");
     } catch (error) {
       console.log(error);
     }
@@ -145,29 +149,44 @@ const AISection = (props) => {
         </>
       ) : (
         <section className="prompts">
-          <div className="prompt">
-            <div className="prompt-icon">
+          {/* <div className="prompt"> */}
+          {/* <div className="prompt-icon">
               <CiPaperplane color="white" size={15} />
             </div>
-            <div className="prompt-text">{promptText}</div>
-          </div>
+            <div className="prompt-text">{promptText}</div> */}
+
+          {submittedPrompts.map((prompt, index) => (
+            <div className="prompt" key={index}>
+              <div className="prompt-icon">
+                <CiPaperplane color="white" size={15} />
+              </div>
+              <div className="prompt-text">{prompt}</div>
+            </div>
+          ))}
+          {/* </div> */}
         </section>
       )}
-        {/* <div className="default-text">Type and enter your problem</div> */}
-          <div  className="chat-input">
-            <input
-              type="text"
-              value={promptText}
-              onChange={(e) => setPromptText(e.target.value)}
-              placeholder="Enter your problem"
-              onKeyDown={handleKeyDown}
-              className="message-input"
-            />
-            <button onClick={handlePromptSubmit} className="send-button">
+      {/* <div className="default-text">Type and enter your problem</div> */}
+      {/* <div className="chat-input">
+        <input
+          type="text"
+          value={promptText}
+          onChange={(e) => setPromptText(e.target.value)}
+          placeholder="Enter your problem"
+          onKeyDown={handleKeyDown}
+          className="message-input"
+        />
+        <button
+          onSubmit={() => {
+            console.log("clicked");
+          }}
+          className="send-button"
+        >
           <BiSend size={20} color="red" />
         </button>
-          </div>
+      </div> */}
 
+      <ChatInput value = {promptText} handleSubmit = {handlePromptSubmit} onChange = {setPromptText}/>
     </div>
   );
 };

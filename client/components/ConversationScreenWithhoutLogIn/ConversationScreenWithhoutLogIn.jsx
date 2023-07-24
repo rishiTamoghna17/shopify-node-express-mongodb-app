@@ -19,9 +19,9 @@ function ConversationScreenWithhoutLogIn(props) {
           </h1>
         </div>
 
-        <div className="conversation-header-convo">
-          <h1 className="conversation-header-convo-content">Feel free to describe any issue or ask any questions you have.</h1>
-        </div>
+      <div className="conversation-header-convo">
+        <h1 className="conversation-header-convo-content">Feel free to describe any issue or ask any questions you have.</h1>
+      </div>
 
         <div className="conversation-header-convo">
           <h1 className="conversation-header-convo-content">
