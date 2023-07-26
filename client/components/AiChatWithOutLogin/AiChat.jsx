@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { categorys } from "../../assets/dummydata";
-import { BiSend } from "react-icons/bi";
 import { AiOutlineMessage } from "react-icons/ai";
 import { CiPaperplane } from "react-icons/ci";
 import ChatInput from "../ChatInput/ChatInput";
@@ -67,12 +66,6 @@ const AISection = (props) => {
       console.log(error);
     }
   };
-
-  function handleKeyDown(event) {
-    if (event.keyCode === 13) {
-      handlePromptSubmit(event);
-    }
-  }
 
   return (
     <div
@@ -157,7 +150,7 @@ const AISection = (props) => {
 
           {submittedPrompts.map((prompt, index) => (
             <div className="prompt" key={index}>
-              <div className="prompt-icon">
+              <div className="prompt-icon float">
                 <CiPaperplane color="white" size={15} />
               </div>
               <div className="prompt-text">{prompt}</div>
@@ -167,24 +160,7 @@ const AISection = (props) => {
         </section>
       )}
       {/* <div className="default-text">Type and enter your problem</div> */}
-      {/* <div className="chat-input">
-        <input
-          type="text"
-          value={promptText}
-          onChange={(e) => setPromptText(e.target.value)}
-          placeholder="Enter your problem"
-          onKeyDown={handleKeyDown}
-          className="message-input"
-        />
-        <button
-          onSubmit={() => {
-            console.log("clicked");
-          }}
-          className="send-button"
-        >
-          <BiSend size={20} color="red" />
-        </button>
-      </div> */}
+
 
       <ChatInput value = {promptText} handleSubmit = {handlePromptSubmit} onChange = {setPromptText}/>
     </div>

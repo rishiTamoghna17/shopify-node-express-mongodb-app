@@ -10,18 +10,18 @@ function ChatInput(props) {
 
   return (
     <div className="chat-input">
-      <input
-        type="text"
-        value={props.value}
-        onChange={(e) => props.onChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Write a message..."
-        className="message-input"
-      />
-      <div onClick={props.handleSubmit} className="send-button">
-        <BiSend size={20} color="red" />
-      </div>
-    </div>
+    <input
+      type="text"
+      value={props.value}
+      onChange={(e) => props.onChange(e.target.value)}
+      onKeyDown={handleKeyDown}
+      placeholder="Write a message..."
+      className="message-input"
+    />
+    <button onClick={props.handleSubmit} className="send-button">
+      <BiSend size={20} color="red" />
+    </button>
+  </div>                
   );
 }
 

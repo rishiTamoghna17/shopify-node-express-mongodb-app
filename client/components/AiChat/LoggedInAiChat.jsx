@@ -5,7 +5,7 @@ import { MdFavoriteBorder, MdReport } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
-import ChatInput from "../ChatInput/ChatInput";
+import ChatInput from "../ChatInput/ChatInput"; 
 
 function LoggedInAiChat(props) {
   const [message, setMessage] = useState("");

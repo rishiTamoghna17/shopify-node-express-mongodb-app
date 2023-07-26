@@ -27,7 +27,13 @@
     border: none;
     outline: none;
     border-radius: 5px;
-    /* background-color: blue; */
+    background-color: blue;
     align-items: center;
     cursor: pointer;
+    
   }
+
+  .send-button svg {
+    pointer-events: auto;
+    
+  } 
