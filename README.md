@@ -52,8 +52,21 @@ SHOPIFY_API_VERSION="2023-04"
 MONGO_URL= "mongodb://mongo:4cUZODmtdYJWuLtC6NLR@containers-us-west-69.railway.app:7048"
 ENCRYPTION_STRING=ENCRYPTION_STRING
 NPM_CONFIG_FORCE=true
+zendesk_api_token  = 3bLzn0Hj4iAd79lKo3e0I9M4us6iEqm7wB9KCI1u
+zendesk_remote_Uri = https://rex4263.zendesk.com/api/v2
+zendesk_username = tamoghanamondal.zerone@gmail.com
+
+
+
+
+
+
+
 
 
 shopify UserName : fotogi1692@anwarb.com
 
 password : 65nuzrMc+8,VAmb
+
+
+<!-- https://admin.shopify.com/store/quickstart-b1d6d5a7/apps/7b7274195e893cc66728d24439275621 -->
