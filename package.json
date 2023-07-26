@@ -53,6 +53,7 @@
     "graphql": "^16.6.0",
     "moment": "^2.29.4",
     "mongoose": "^7.3.0",
+    "node-zendesk": "^2.2.0",
     "raviger": "^4.1.2",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
