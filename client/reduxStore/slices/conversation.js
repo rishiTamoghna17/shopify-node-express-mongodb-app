@@ -1,23 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = []
+const initialState = [];
 
 export const conversationSlice = createSlice({
-  name: 'conversation',
+  name: "conversation",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    // increment: (state) => {
+    //   state.value += 1
+    // },
+    // decrement: (state) => {
+    //   state.value -= 1
+    // },
+    add: (state, action) => {
+      state.push(action.payload);
     },
   },
-})
+});
 
-export const { increment, decrement, incrementByAmount } = conversationSlice.actions
+export const { increment, decrement, add } =
+  conversationSlice.actions;
 
-export default conversationSlice.reducer
+export default conversationSlice.reducer;

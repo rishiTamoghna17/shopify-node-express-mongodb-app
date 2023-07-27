@@ -6,6 +6,8 @@ import { usePath, useRoutes } from "raviger";
 import routes from "./Routes";
 import ApolloClientProvider from "./providers/ApolloClientProvider";
 import AppBridgeProvider from "./providers/AppBridgeProvider";
+import { Provider } from "react-redux";
+import { store } from "./reduxStore/store";
 
 const appBridgeConfig = {
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -24,11 +26,11 @@ export default function App() {
           navigationLinks={[
             {
               label: "Ticket/Conversations",
-              destination: "/tickets"
+              destination: "/tickets",
             },
             {
               label: "default",
-              destination: "/default"
+              destination: "/default",
             },
             {
               label: "Login",
@@ -41,12 +43,15 @@ export default function App() {
             {
               label: "Billing API",
               destination: "/debug/billing",
-            }
-            
+            },
           ]}
           matcher={(link) => currentPath === link.destination}
         />
-        <ApolloClientProvider>{RouteComponents}</ApolloClientProvider>
+        <ApolloClientProvider>
+          <Provider store={store}>
+            {RouteComponents}
+            </Provider>
+        </ApolloClientProvider>
       </AppBridgeProvider>
     </PolarisProvider>
   );

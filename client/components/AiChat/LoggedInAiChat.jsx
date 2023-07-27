@@ -6,7 +6,8 @@ import { BiSend } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
 import ChatInput from "../ChatInput/ChatInput"; 
-
+import { useDispatch } from "react-redux";
+import {add} from '../../reduxStore/slices/conversation'
 function LoggedInAiChat(props) {
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -17,6 +18,8 @@ function LoggedInAiChat(props) {
   const [selectedCustomer, setSelectedCustomer] = useState("user1");
   const [requestId, setRequestId] = useState("# abcD123");
   const [ticketId, setTicketId] = useState("# idquD123");
+
+  const dispatch = useDispatch();
 
   const getTimeElapsed = (timestamp) => {
     // Use moment.js to calculate the elapsed time
@@ -33,6 +36,11 @@ function LoggedInAiChat(props) {
         { user: selectedCustomer, message },
         { user: "AI", message: response },
       ]);
+      dispatch(add([
+        ...conversation,
+        { user: selectedCustomer, message },
+        { user: "AI", message: response },
+      ]));
       setMessage("");
     }
   };

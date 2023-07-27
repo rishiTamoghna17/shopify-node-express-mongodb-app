@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiRefresh } from "react-icons/bi";
 import { FiFilter } from "react-icons/fi";
 import { FaRegStar, FaStar } from "react-icons/fa";
@@ -6,8 +6,18 @@ import { TiMessage } from "react-icons/ti";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./ConversionScreen.css";
 import NewRequestButton from "../NewRequestButton/NewRequestButton";
+import {useSelector} from 'react-redux'
 
 const ConversationScreen = (props) => {
+const [filter, SetFilter] = useState("");
+
+  const conversation = useSelector(state => state.conversation).slice(-1)
+console.log(conversation)
+
+
+const filteredData = props?.conversations.filter((user) =>
+    user.title.toLowerCase().includes(filter)
+  );
   return (
     <div
       className="ConversationScreenWithhoutLogIn"
@@ -19,6 +29,7 @@ const ConversationScreen = (props) => {
             type="text"
             placeholder="Search conversations"
             className="rounded-input"
+            onChange={(e) => SetFilter(e.target.value)}
           />
         </div>
         <div className="conversation-header-row">
@@ -46,7 +57,7 @@ const ConversationScreen = (props) => {
 
         {/* Conversation data */}
         <div className="conversation-list">
-          {props?.conversations.map((conversation) => (
+          {filteredData.map((conversation) => (
             <div className="conversation-item" key={conversation.id}>
               <div className="conversation-info">
                 <h4 className="conversation-title">{conversation.title}</h4>

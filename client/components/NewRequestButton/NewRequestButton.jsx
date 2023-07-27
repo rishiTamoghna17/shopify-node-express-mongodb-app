@@ -2,10 +2,15 @@ import React from "react";
 import { TiMessage } from "react-icons/ti";
 import "./NewRequestButton.css";
 import useFetch from "../../hooks/useFetch";
-
+import { useSelector } from "react-redux";
 function NewRequestButton(props) {
-
   const fetch = useFetch();
+  const conversation = useSelector((state) => state.conversation).slice(-1)[0];
+  const conversationArray = conversation ? Object.values(conversation) : [];
+  // Filter messages where user is 'AI'
+  const Userdata = conversationArray.filter(message => message.user !== 'AI').slice(-1)[0];
+  // console.log("user",Userdata.user);
+  // console.log("user message",Userdata.message);
 
   const handleNewTicket = () => {
     createZendeskTicket();
@@ -13,12 +18,12 @@ function NewRequestButton(props) {
 
   function createZendeskTicket() {
     const ticketData = {
-      subject: "orem Ipsum is simply dummy text", 
-      description: "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
-      requesterName: "John Doe", 
-      requesterEmail: "john.doe@example.com", 
+      subject: "orem Ipsum is simply dummy text",
+      description:Userdata.message,
+      requesterName: Userdata.user,
+      requesterEmail: "john.doe@example.com",
     };
-
+// console.log(ticketData);
     fetch("api/createZendeskTicket", {
       method: "POST",
       headers: {
@@ -28,7 +33,6 @@ function NewRequestButton(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-
         if (data.success) {
           alert("Zendesk ticket created successfully!");
         } else {
@@ -44,7 +48,11 @@ function NewRequestButton(props) {
   }
   return (
     <div className="conversation-footer-button-cls">
-      <button type="button" className="refresh-button" onClick={handleNewTicket}>
+      <button
+        type="button"
+        className="refresh-button"
+        onClick={handleNewTicket}
+      >
         {<TiMessage color="white" size="30px" />}start new request
       </button>
     </div>
