@@ -19,7 +19,7 @@ userRoutes.post("/api", (req, res) => {
 //******************************************************************************************* */
 
 //create tickets
-userRoutes.post('/api/tickets', async (req, res) => {
+userRoutes.post("/api/tickets", async (req, res) => {
   try {
     const { subject, description, requester, priority, support } = req.body;
 
@@ -28,32 +28,30 @@ userRoutes.post('/api/tickets', async (req, res) => {
       description,
       requester,
       priority,
-      support
+      support,
     });
 
     await ticket.save();
 
     res.status(201).json({ ticket });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create a ticket' });
+    res.status(500).json({ error: "Failed to create a ticket" });
   }
 });
 // Get all tickets
-userRoutes.get('/api/tickets', async (req, res) => {
-  try {
-    const tickets = await Ticket.find();
-    res.status(200).send(tickets);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to get the tickets' });
-  }
-});
+// userRoutes.get("/api/tickets", async (req, res) => {
+//   try {
+//     const tickets = await Ticket.find();
+//     res.status(200).send(tickets);
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to get the tickets" });
+//   }
+// });
 
 //create zendesk ticket api
-userRoutes.post('/api/createZendeskTicket', (req, res) => {
-
+userRoutes.post("/api/createZendeskTicket", (req, res) => {
   const { subject, description, requesterName, requesterEmail } = req.body;
 
-  // Prepare the ticket data
   const ticketData = {
     ticket: {
       subject,
@@ -64,12 +62,10 @@ userRoutes.post('/api/createZendeskTicket', (req, res) => {
       },
     },
   };
-
-  // Create the ticket
   zd.tickets.create(ticketData, (err, req, result) => {
     if (err) {
-      console.error('Error creating Zendesk ticket:', err);
-      res.status(500).json({ error: 'Failed to create Zendesk ticket' });
+      console.error("Error creating Zendesk ticket:", err);
+      res.status(500).json({ error: "Failed to create Zendesk ticket" });
     } else {
       // console.log('Zendesk ticket created:', result);
       res.status(201).json({ success: true });
@@ -77,6 +73,20 @@ userRoutes.post('/api/createZendeskTicket', (req, res) => {
   });
 });
 
+// GET endpoint to retrieve all tickets
+userRoutes.get('/api/tickets', (req, res) => {
+  // Use the 'tickets' API to get all tickets
+  zd.tickets.list((err, req, result) => {
+    if (err) {
+      console.error('Error fetching tickets:', err);
+      res.status(500).json({ error: 'Failed to fetch tickets' });
+    } else {
+      const tickets = result 
+      // console.log('All tickets:', JSON.stringify(result.slice(0,2)));
+      res.status(200).json(tickets);
+    }
+  });
+});
 
 //****************************************************************//
 
