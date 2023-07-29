@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Ticket.css";
 import Chart from "react-apexcharts";
 import useFetch from "../../hooks/useFetch";
 import { AiOutlineMail } from "react-icons/ai";
-
 function Ticket({ graph }) {
   const [selectedAutomationType, setSelectedAutomationType] = useState("all");
   const [selectedDateFilter, setSelectedDateFilter] = useState("last30days");
   const [ticket, setTicket] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const fetch = useFetch();
-  const [chartData, setChartData] = useState({
+
+  const getInitialChartData = () => ({
     options: {
       stroke: {
         curve: "straight",
@@ -62,8 +61,10 @@ function Ticket({ graph }) {
     ],
   });
 
-  async function fetchContent() {
-    setTicket("loading...");
+  const [chartData, setChartData] = useState(getInitialChartData());
+
+  async function fetchData() {
+    setIsLoading(true);
     const res = await fetch("/api/tickets");
     const response = await res.json();
     console.log(response);
@@ -71,84 +72,18 @@ function Ticket({ graph }) {
       setTicket([]);
     } else {
       setTicket(response);
+      updateChartData(response.filter((item) => filterByDateRange(item, selectedDateFilter)));
     }
+    setIsLoading(false);
   }
 
   useEffect(() => {
-    fetchContent();
+    fetchData();
   }, []);
 
-  // Calculate total ticket count
-  const totalTicketCount = ticket.length;
+  const totalTicketCount = useMemo(() => ticket.length, [ticket]);
 
-  // Update chart data based on selected filters
-  function updateChartData() {
-    let filteredData = [...ticket];
-
-    // Filter by automation type
-    if (selectedAutomationType !== "all") {
-      filteredData = filteredData.filter(
-        (item) => item.type === selectedAutomationType
-      );
-    }
-
-    // Filter by date range
-    switch (selectedDateFilter) {
-      case "last90days":
-        // Implement filtering for last 90 days
-        const last90Days = new Date();
-        last90Days.setDate(last90Days.getDate() - 90);
-        filteredData = filteredData.filter(
-          (item) => new Date(item.created_at) >= last90Days
-        );
-        break;
-      case "last60days":
-        // Implement filtering for last 60 days
-        const last60Days = new Date();
-        last60Days.setDate(last60Days.getDate() - 60);
-        filteredData = filteredData.filter(
-          (item) => new Date(item.created_at) >= last60Days
-        );
-        break;
-      case "last30days":
-        // Implement filtering for last 30 days
-        const last30Days = new Date();
-        last30Days.setDate(last30Days.getDate() - 30);
-        filteredData = filteredData.filter(
-          (item) => new Date(item.created_at) >= last30Days
-        );
-        break;
-      case "last15days":
-        // Implement filtering for last 15 days
-        const last15Days = new Date();
-        last15Days.setDate(last15Days.getDate() - 15);
-        filteredData = filteredData.filter(
-          (item) => new Date(item.created_at) >= last15Days
-        );
-        break;
-      case "lastweek":
-        // Implement filtering for last week
-        const lastWeek = new Date();
-        lastWeek.setDate(lastWeek.getDate() - 7);
-        filteredData = filteredData.filter(
-          (item) => new Date(item.created_at) >= lastWeek
-        );
-        break;
-      case "custom":
-        // Implement filtering for custom date range
-        // Replace 'startDate' and 'endDate' with actual custom date range values
-        const startDate = new Date("2023-07-01");
-        const endDate = new Date("2023-07-28");
-        filteredData = filteredData.filter(
-          (item) =>
-            new Date(item.created_at) >= startDate &&
-            new Date(item.created_at) <= endDate
-        );
-        break;
-      default:
-        break;
-    }
-
+  function calculateTicketCountByDate(filteredData) {
     const ticketCountByDate = {};
     filteredData.forEach((item) => {
       const date = item.created_at.split("T")[0]; // Extract date part from "created_at"
@@ -160,10 +95,47 @@ function Ticket({ graph }) {
       }
     });
 
-    // Extract the dates (categories) and ticket counts (data) from the object
+    return ticketCountByDate;
+  }
 
-    setCategories(Object.keys(ticketCountByDate));
-    setData(Object.values(ticketCountByDate));
+  function extractCategories(ticketCountByDate) {
+    return Object.keys(ticketCountByDate);
+  }
+
+  function extractData(ticketCountByDate) {
+    return Object.values(ticketCountByDate);
+  }
+
+  const filteredData = ticket.filter((item) => filterByDateRange(item, selectedDateFilter));
+  const ticketCountByDate = calculateTicketCountByDate(filteredData);
+  const categories = extractCategories(ticketCountByDate);
+  const data = extractData(ticketCountByDate);
+
+  useEffect(() => {
+    updateChartData(filteredData);
+  }, [selectedAutomationType, selectedDateFilter]);
+
+  function filterByDateRange(item, selectedDateFilter) {
+    const dateFilters = {
+      last90days: 90,
+      last60days: 60,
+      last30days: 30,
+      last15days: 15,
+      lastweek: 7,
+    };
+    const days = dateFilters[selectedDateFilter];
+    if (!days) {
+      return true;
+    }
+    const date = new Date();
+    date.setDate(date.getDate() - days);
+    return new Date(item.created_at) >= date;
+  }
+
+  function updateChartData(filteredData) {
+    const ticketCountByDate = calculateTicketCountByDate(filteredData);
+    const categories = extractCategories(ticketCountByDate);
+    const data = extractData(ticketCountByDate);
 
     setChartData((prevChartData) => ({
       ...prevChartData,
@@ -183,18 +155,12 @@ function Ticket({ graph }) {
     }));
   }
 
-  // Call updateChartData whenever the filters change
-  useEffect(() => {
-    updateChartData();
-  }, [selectedAutomationType, selectedDateFilter]);
-
   console.log("categories", categories);
   console.log("data", data);
 
   return (
     <div className="ticket-count-dashboard">
-      {/* Show loading message while data is being fetched */}
-      {ticket === "loading..." ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <>
@@ -204,7 +170,6 @@ function Ticket({ graph }) {
               <span className="total-ticket-count">{totalTicketCount}</span>
             </div>
             <div className="ticket-filters">
-              {/* Implement automation type filter */}
               <select
                 value={selectedAutomationType}
                 onChange={(e) => setSelectedAutomationType(e.target.value)}
@@ -213,7 +178,6 @@ function Ticket({ graph }) {
                 <option value="email">Email</option>
                 <option value="frontend">Frontend</option>
               </select>
-              {/* Implement date filter */}
               <select
                 value={selectedDateFilter}
                 onChange={(e) => setSelectedDateFilter(e.target.value)}
@@ -228,7 +192,7 @@ function Ticket({ graph }) {
             </div>
           </div>
           <div className={graph ? "ticket-graph" : "ticket-disabled"}>
-            {categories?.length === 0 || data?.length === 0 ? (
+            {categories.length === 0 || data.length === 0 ? (
               <div>No data available</div>
             ) : (
               <Chart
@@ -246,3 +210,7 @@ function Ticket({ graph }) {
 }
 
 export default Ticket;
+
+
+
+
