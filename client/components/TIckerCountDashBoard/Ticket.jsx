@@ -10,8 +10,6 @@ function Ticket({ graph }) {
   const [selectedDateFilter, setSelectedDateFilter] = useState("last30days");
   const [ticket, setTicket] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [customStartDate, setCustomStartDate] = useState("");
-const [customEndDate, setCustomEndDate] = useState("");
   const fetch = useFetch();
 
   const getInitialChartData = () => ({
@@ -76,7 +74,9 @@ const [customEndDate, setCustomEndDate] = useState("");
       setTicket([]);
     } else {
       setTicket(response);
-      updateChartData(response.filter((item) => filterByDateRange(item, selectedDateFilter)));
+      updateChartData(
+        response.filter((item) => filterByDateRange(item, selectedDateFilter))
+      );
     }
     setIsLoading(false);
   }
@@ -110,7 +110,9 @@ const [customEndDate, setCustomEndDate] = useState("");
     return Object.values(ticketCountByDate);
   }
 
-  const filteredData = ticket.filter((item) => filterByDateRange(item, selectedDateFilter));
+  const filteredData = ticket.filter((item) =>
+    filterByDateRange(item, selectedDateFilter)
+  );
   const ticketCountByDate = calculateTicketCountByDate(filteredData);
   const categories = extractCategories(ticketCountByDate);
   const data = extractData(ticketCountByDate);
@@ -120,7 +122,6 @@ const [customEndDate, setCustomEndDate] = useState("");
   }, [selectedAutomationType, selectedDateFilter]);
 
   function filterByDateRange(item, selectedDateFilter) {
-    
     const dateFilters = {
       last90days: 90,
       last60days: 60,
@@ -142,9 +143,7 @@ const [customEndDate, setCustomEndDate] = useState("");
     return date >= new Date(startDate) && date <= new Date(endDate);
   }
 
-
   function updateChartData(filteredData) {
-    
     const ticketCountByDate = calculateTicketCountByDate(filteredData);
     const categories = extractCategories(ticketCountByDate);
     const data = extractData(ticketCountByDate);
@@ -176,7 +175,6 @@ const [customEndDate, setCustomEndDate] = useState("");
       updateChartData(filteredData);
     }
   };
-
 
   console.log("categories", categories);
   console.log("data", data);
@@ -212,14 +210,15 @@ const [customEndDate, setCustomEndDate] = useState("");
                 <option value="lastweek">Last Week</option>
                 <option value="custom">Custom Date Range</option>
               </select>
+              {/* New section to input custom date range using Ant Design RangePicker */}
+              {selectedDateFilter === "custom" && (
+                <div className="custom-date-range">
+                  <DatePicker.RangePicker onChange={handleDateRangeChange} />
+                </div>
+              )}
             </div>
           </div>
-          {/* New section to input custom date range using Ant Design RangePicker */}
-          {selectedDateFilter === "custom" && (
-            <div className="custom-date-range">
-              <DatePicker.RangePicker onChange={handleDateRangeChange} />
-            </div>
-          )}
+
           <div className={graph ? "ticket-graph" : "ticket-disabled"}>
             {categories.length === 0 || data.length === 0 ? (
               <div>No data available</div>
@@ -239,7 +238,3 @@ const [customEndDate, setCustomEndDate] = useState("");
 }
 
 export default Ticket;
-
-
-
-
