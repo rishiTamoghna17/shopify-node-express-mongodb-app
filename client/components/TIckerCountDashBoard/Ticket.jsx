@@ -2,12 +2,16 @@ import React, { useEffect, useState, useMemo } from "react";
 import "./Ticket.css";
 import Chart from "react-apexcharts";
 import useFetch from "../../hooks/useFetch";
+import { DatePicker } from "antd";
 import { AiOutlineMail } from "react-icons/ai";
+
 function Ticket({ graph }) {
   const [selectedAutomationType, setSelectedAutomationType] = useState("all");
   const [selectedDateFilter, setSelectedDateFilter] = useState("last30days");
   const [ticket, setTicket] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [customStartDate, setCustomStartDate] = useState("");
+const [customEndDate, setCustomEndDate] = useState("");
   const fetch = useFetch();
 
   const getInitialChartData = () => ({
@@ -116,6 +120,7 @@ function Ticket({ graph }) {
   }, [selectedAutomationType, selectedDateFilter]);
 
   function filterByDateRange(item, selectedDateFilter) {
+    
     const dateFilters = {
       last90days: 90,
       last60days: 60,
@@ -132,7 +137,14 @@ function Ticket({ graph }) {
     return new Date(item.created_at) >= date;
   }
 
+  function filterByCustomDateRange(item, startDate, endDate) {
+    const date = new Date(item.created_at);
+    return date >= new Date(startDate) && date <= new Date(endDate);
+  }
+
+
   function updateChartData(filteredData) {
+    
     const ticketCountByDate = calculateTicketCountByDate(filteredData);
     const categories = extractCategories(ticketCountByDate);
     const data = extractData(ticketCountByDate);
@@ -154,6 +166,17 @@ function Ticket({ graph }) {
       ],
     }));
   }
+  const handleDateRangeChange = (dates) => {
+    if (dates && dates.length === 2) {
+      const startDate = dates[0].toISOString();
+      const endDate = dates[1].toISOString();
+      const filteredData = ticket.filter((item) =>
+        filterByCustomDateRange(item, startDate, endDate)
+      );
+      updateChartData(filteredData);
+    }
+  };
+
 
   console.log("categories", categories);
   console.log("data", data);
@@ -191,6 +214,12 @@ function Ticket({ graph }) {
               </select>
             </div>
           </div>
+          {/* New section to input custom date range using Ant Design RangePicker */}
+          {selectedDateFilter === "custom" && (
+            <div className="custom-date-range">
+              <DatePicker.RangePicker onChange={handleDateRangeChange} />
+            </div>
+          )}
           <div className={graph ? "ticket-graph" : "ticket-disabled"}>
             {categories.length === 0 || data.length === 0 ? (
               <div>No data available</div>
