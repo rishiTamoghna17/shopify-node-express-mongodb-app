@@ -1,10 +1,9 @@
 import React from "react";
 import { TiMessage } from "react-icons/ti";
 import "./NewRequestButton.css";
-import useFetch from "../../hooks/useFetch";
 import { useSelector } from "react-redux";
 function NewRequestButton(props) {
-  const fetch = useFetch();
+
   const conversation = useSelector((state) => state.conversation).slice(-1)[0];
   const conversationArray = conversation ? Object.values(conversation) : [];
   // Filter messages where user is 'AI'
@@ -13,39 +12,10 @@ function NewRequestButton(props) {
   // console.log("user message",Userdata.message);
 
   const handleNewTicket = () => {
-    createZendeskTicket();
+  console.log("cteate new ticket")
   };
 
-  function createZendeskTicket() {
-    const ticketData = {
-      subject: "orem Ipsum is simply dummy text",
-      description:Userdata.message,
-      requesterName: Userdata.user,
-      requesterEmail: "john.doe@example.com",
-    };
-// console.log(ticketData);
-    fetch("api/createZendeskTicket", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ticketData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Zendesk ticket created successfully!");
-        } else {
-          alert("Failed to create Zendesk ticket. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error creating Zendesk ticket:", error);
-        alert(
-          "An error occurred while creating the Zendesk ticket. Please try again later."
-        );
-      });
-  }
+
   return (
     <div className="conversation-footer-button-cls">
       <button

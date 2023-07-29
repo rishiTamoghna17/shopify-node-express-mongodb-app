@@ -11,7 +11,7 @@ const AISection = (props) => {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [subCategories, setSubCategories] = useState([]);
   const [prompts, setPrompts] = useState([]);
-  const [promptText, setPromptText] = useState("");
+  // const [promptText, setPromptText] = useState("");
   const [showDefaultText, setShowDefaultText] = useState(true);
   const [submittedPrompts, setSubmittedPrompts] = useState([]);
 
@@ -52,20 +52,20 @@ const AISection = (props) => {
     }
   };
 
-  const handlePromptSubmit = (e) => {
-    e.preventDefault();
-    try {
-      const trimmedPrompt = promptText.trim();
-      console.log("Button clicked!");
-      if (promptText.trim() !== "") {
-        setShowDefaultText(false);
-        setSubmittedPrompts((prevPrompts) => [...prevPrompts, trimmedPrompt]);
-      }
-      setPromptText("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handlePromptSubmit = (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const trimmedPrompt = promptText.trim();
+  //     console.log("Button clicked!");
+  //     if (promptText.trim() !== "") {
+  //       setShowDefaultText(false);
+  //       setSubmittedPrompts((prevPrompts) => [...prevPrompts, trimmedPrompt]);
+  //     }
+  //     setPromptText("");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div
@@ -162,7 +162,9 @@ const AISection = (props) => {
       {/* <div className="default-text">Type and enter your problem</div> */}
 
 
-      <ChatInput value = {promptText} handleSubmit = {handlePromptSubmit} onChange = {setPromptText}/>
+      <ChatInput 
+      // value = {promptText} handleSubmit = {handlePromptSubmit} onChange = {setPromptText}
+      />
     </div>
   );
 };
