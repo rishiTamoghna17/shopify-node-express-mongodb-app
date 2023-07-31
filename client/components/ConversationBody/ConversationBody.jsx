@@ -17,12 +17,9 @@ function ConversationBody() {
   const [selectedCustomer, setSelectedCustomer] = useState("user1");
   const [requestId, setRequestId] = useState("# abcD123");
   const [ticketId, setTicketId] = useState("29");
-  // const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const fetch = useFetch();
-  
-
-
+ 
   useEffect(() => {
     // Fetch conversations from your backend API
     fetch(`/api/tickets/${ticketId}/conversations`)

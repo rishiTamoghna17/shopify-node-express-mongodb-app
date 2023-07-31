@@ -3,6 +3,7 @@ import { BiSend } from "react-icons/bi";
 import "./chatInput.css";
 import useFetch from "../../hooks/useFetch";
 import createZendeskTicket from "../../apis/createZendesk";
+
 function ChatInput(props) {
   const [ticketBody, setTicketBody] = useState("");
   const fetch = useFetch();
