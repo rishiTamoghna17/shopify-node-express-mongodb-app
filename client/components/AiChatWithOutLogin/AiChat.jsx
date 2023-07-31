@@ -5,6 +5,8 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { CiPaperplane } from "react-icons/ci";
 import ChatInput from "../ChatInput/ChatInput";
 import "./Aichat.css";
+import ConversationBody from "../ConversationBody/ConversationBody";
+
 
 const AISection = (props) => {
   const mainCategories = categorys.map((category) => category.mainCategory);
@@ -148,15 +150,16 @@ const AISection = (props) => {
             </div>
             <div className="prompt-text">{promptText}</div> */}
 
-          {submittedPrompts.map((prompt, index) => (
+          {/* {submittedPrompts.map((prompt, index) => (
             <div className="prompt" key={index}>
               <div className="prompt-icon float">
                 <CiPaperplane color="white" size={15} />
               </div>
               <div className="prompt-text">{prompt}</div>
             </div>
-          ))}
+          ))} */}
           {/* </div> */}
+          <ConversationBody/>
         </section>
       )}
       {/* <div className="default-text">Type and enter your problem</div> */}

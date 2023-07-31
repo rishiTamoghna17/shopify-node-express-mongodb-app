@@ -3,7 +3,7 @@ import clientProvider from "../../utils/clientProvider.js";
 import subscriptionRoute from "./recurringSubscriptions.js";
 import Ticket from "../../utils/models/TicketModel.js";
 import zd from "../libs/zendeskClient.js";
-
+import  axios from 'axios';
 const userRoutes = Router();
 userRoutes.use(subscriptionRoute);
 
@@ -18,15 +18,6 @@ userRoutes.post("/api", (req, res) => {
 
 //******************************************************************************************* */
 
-// Get all tickets
-// userRoutes.get("/api/tickets", async (req, res) => {
-//   try {
-//     const tickets = await Ticket.find();
-//     res.status(200).send(tickets);
-//   } catch (error) {
-//     res.status(500).json({ error: "Failed to get the tickets" });
-//   }
-// });
 
 //create zendesk ticket api
 userRoutes.post("/api/createZendeskTicket", (req, res) => {
@@ -50,13 +41,13 @@ userRoutes.post("/api/createZendeskTicket", (req, res) => {
       res.status(500).json({ error: "Failed to create Zendesk ticket" });
     } else {
       // console.log('Zendesk ticket created:', result);
-      res.status(201).send({ "message": "Zendesk ticket created successfully!", success: true });
+      res.status(201).send({result:result, "message": "Zendesk ticket created successfully!", success: true });
     }
   });
 });
 
 
-// GET endpoint to retrieve all tickets
+// retrieve all tickets
 userRoutes.get('/api/tickets', (req, res) => {
   // Use the 'tickets' API to get all tickets
   zd.tickets.list((err, req, result) => {
@@ -66,11 +57,27 @@ userRoutes.get('/api/tickets', (req, res) => {
     } else {
       const tickets = result 
       // console.log('All tickets:', JSON.stringify(result.slice(0,2)));
-      res.status(200).json(tickets);
+      res.status(200).send(tickets);
     }
   });
 });
 
+// retrieve conversation tickets
+userRoutes.get('/api/tickets/:ticketId/conversations', async(req, res) => {
+  const { ticketId } = req.params;
+
+  // Use the Zendesk API client to fetch ticket comments
+  zd.tickets.getComments(ticketId, (err, req, result) => {
+    if (err) {
+      console.error("Error fetching ticket comments from Zendesk:", err);
+      res.status(500).json({ error: "Failed to fetch ticket comments from Zendesk" });
+    } else {
+
+      res.status(200).send(result);
+
+    }
+  });
+});
 //****************************************************************//
 
 userRoutes.get("/api/gql", async (req, res) => {

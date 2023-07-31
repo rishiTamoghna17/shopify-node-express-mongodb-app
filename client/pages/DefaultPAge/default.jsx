@@ -12,7 +12,7 @@ import DetailConversation from "../../components/ConversationDetail/DetailConver
 import LoggedInDetailConversation from "../../components/LoggedInDetailConversation/LoggedInDetailConversation";
 
 function defaultPAge() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <Page>
       <div>
