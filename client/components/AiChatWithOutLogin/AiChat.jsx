@@ -6,6 +6,7 @@ import { CiPaperplane } from "react-icons/ci";
 import ChatInput from "../ChatInput/ChatInput";
 import "./Aichat.css";
 import ConversationBody from "../ConversationBody/ConversationBody";
+import {useSelector} from 'react-redux'
 
 
 const AISection = (props) => {
@@ -15,8 +16,11 @@ const AISection = (props) => {
   const [prompts, setPrompts] = useState([]);
   // const [promptText, setPromptText] = useState("");
   const [showDefaultText, setShowDefaultText] = useState(true);
-  const [submittedPrompts, setSubmittedPrompts] = useState([]);
-
+  const createdTicket = useSelector(state => state.ticketData).slice(-1)[0]
+  useEffect(() =>{
+    if(createdTicket?.result?.id)
+    setShowDefaultText(false)
+  },[createdTicket])
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCategoryIndex(
@@ -144,21 +148,6 @@ const AISection = (props) => {
         </>
       ) : (
         <section className="prompts">
-          {/* <div className="prompt"> */}
-          {/* <div className="prompt-icon">
-              <CiPaperplane color="white" size={15} />
-            </div>
-            <div className="prompt-text">{promptText}</div> */}
-
-          {/* {submittedPrompts.map((prompt, index) => (
-            <div className="prompt" key={index}>
-              <div className="prompt-icon float">
-                <CiPaperplane color="white" size={15} />
-              </div>
-              <div className="prompt-text">{prompt}</div>
-            </div>
-          ))} */}
-          {/* </div> */}
           <ConversationBody/>
         </section>
       )}

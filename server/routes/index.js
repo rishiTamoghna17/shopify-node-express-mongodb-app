@@ -78,6 +78,31 @@ userRoutes.get('/api/tickets/:ticketId/conversations', async(req, res) => {
     }
   });
 });
+
+// Add conversation to a ticket
+userRoutes.post('/api/tickets/:ticketId/addConversation', async (req, res) => {
+  const { ticketId } = req.params;
+  const { body, authorEmail,authorId } = req.body;
+
+  // Use the Zendesk API client to add a new conversation to the ticket
+  zd.tickets.update(ticketId, {
+    ticket: {
+      comment: {
+        body,
+        public: true,
+        author_id: authorId,
+        author_email: authorEmail,
+      },
+    },
+  }, (err, req, result) => {
+    if (err) {
+      console.error('Error adding conversation to ticket:', err);
+      res.status(500).json({ error: 'Failed to add conversation to ticket' });
+    } else {
+      res.status(201).send({ message: 'Conversation added successfully!', success: true });
+    }
+  });
+});
 //****************************************************************//
 
 userRoutes.get("/api/gql", async (req, res) => {

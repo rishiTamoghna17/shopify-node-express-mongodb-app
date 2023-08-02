@@ -4,10 +4,10 @@ import { MdFavoriteBorder, MdReport } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
-import { useDispatch } from "react-redux";
-import { add } from "../../reduxStore/slices/conversation";
 import useFetch from "../../hooks/useFetch";
 import './ConversationBody.css'
+import {useSelector} from 'react-redux'
+
 function ConversationBody() {
   const [conversation, setConversation] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(
@@ -16,19 +16,36 @@ function ConversationBody() {
   const [iconIsDropdownOpen, setIconIsDropdownOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState("user1");
   const [requestId, setRequestId] = useState("# abcD123");
-  const [ticketId, setTicketId] = useState("29");
-  const [message, setMessage] = useState("");
+  const [ticketId, setTicketId] = useState("");
+  const [ticket, setTicket] = useState({})
   const fetch = useFetch();
- 
-  useEffect(() => {
-    // Fetch conversations from your backend API
-    fetch(`/api/tickets/${ticketId}/conversations`)
-      .then((response) => response.json())
-      .then((data) => setConversation(data))
-      .catch((error) => console.error('Error fetching conversations:', error));
-  }, [ticketId]);
+  const createdTicket = useSelector(state => state.ticketData).slice(-1)[0]
 
-  console.log("conversation", conversation);
+  useEffect(() => {
+  setTicket(createdTicket?.result)
+  setTicketId(createdTicket?.result?.id)
+  },[createdTicket])
+
+
+  const fetchConversations = () => {
+    if (ticketId === undefined) {
+      setConversation([]);
+    } else {
+      fetch(`/api/tickets/${ticketId}/conversations`)
+        .then((response) => response.json())
+        .then((data) => setConversation(data))
+        .catch((error) => console.error('Error fetching conversations:', error));
+    }
+  };
+ // Initial fetch when ticketId changes
+//  useEffect(() => {
+//    fetchConversations();
+//  },[]);
+    fetchConversations()
+
+
+  // console.log("conversation", conversation);
+  // console.log("createdTicket",ticket)
 
   const getTimeElapsed = (timestamp) => {
     // Use moment.js to calculate the elapsed time
@@ -46,7 +63,10 @@ function ConversationBody() {
       return newState;
     });
   };
+  // const userTxt = conversation.filter((data)=>data.author_id ===ticket.requester_id)
+  // const agentTxt = conversation.filter((data)=>data.author_id ===ticket.assignee_id)
 
+  
   const handleCustomerChange = (e) => {
     e.preventDefault();
     setSelectedCustomer(e.target.value);
@@ -127,19 +147,20 @@ function ConversationBody() {
         </div>
       </div>
       <div className="chat-body">
-        {conversation && conversation?.map((entry, index) => (
+        {conversation.length!==0 && conversation?.map((entry, index) => (
+          
           <div key={index} className="chat-message">
             <div
               className={
-                entry.user === selectedCustomer ? "user-message" : "ai-message"
+                entry.author_id === ticket.requester_id ? "user-message" : "agent-message"
               }
             >
               <div className="message-content">
                 <div className="user-info">
-                  <strong>{entry.user}:</strong>
+                  <strong>{(entry.author_id===ticket.requester_id?"user":"agent")}:</strong>
                   <div className="chat-time-dot">
                     <span className="time-elapsed">
-                      {getTimeElapsed(entry.timestamp)}
+                      {getTimeElapsed(entry.created_at)}
                     </span>
 
                     <div
