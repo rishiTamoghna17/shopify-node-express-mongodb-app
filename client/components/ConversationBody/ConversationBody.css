@@ -65,7 +65,7 @@
     width: 100%;
     color: white;
     background-color: transparent;
-    overflow-y: auto;
+    /* overflow-y: auto; */
   }
   
   /* .chat-message {

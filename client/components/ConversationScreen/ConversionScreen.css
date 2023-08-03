@@ -19,6 +19,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: blue; */
+  height:85%;
 }
 
 .search-bar {
@@ -39,7 +41,7 @@
 
 .search-bar input[type="text"]::placeholder {
   color: white;
-  padding-left: 40px;
+  /* padding-left: 40px; */
   background-repeat: no-repeat;
   background-position: 10px center;
   border: none;
@@ -107,6 +109,9 @@
   border-radius: 4px;
   padding: 10px;
   width: 100%;
+  overflow: auto;
+  /* background-color: red; */
+ 
 }
 
 .conversation-item {

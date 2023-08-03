@@ -4,6 +4,8 @@ import Chart from "react-apexcharts";
 import useFetch from "../../hooks/useFetch";
 import { DatePicker } from "antd";
 import { AiOutlineMail } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { add } from "../../reduxStore/slices/conversation.js";
 
 function Ticket({ graph }) {
   const [selectedAutomationType, setSelectedAutomationType] = useState("all");
@@ -11,6 +13,8 @@ function Ticket({ graph }) {
   const [ticket, setTicket] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const fetch = useFetch();
+  const dispatch = useDispatch();
+  
 
   const getInitialChartData = () => ({
     options: {
@@ -74,6 +78,7 @@ function Ticket({ graph }) {
       setTicket([]);
     } else {
       setTicket(response);
+      dispatch(add(response));
       updateChartData(
         response.filter((item) => filterByDateRange(item, selectedDateFilter))
       );

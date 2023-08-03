@@ -11,12 +11,12 @@ import {useSelector} from 'react-redux'
 const ConversationScreen = (props) => {
 const [filter, SetFilter] = useState("");
 
-  const conversation = useSelector(state => state.conversation).slice(-1)
-console.log(conversation)
+  const conversation = useSelector(state => state.conversation).slice(-1)[0]
+console.log("conversation",conversation);
 
 
-const filteredData = props?.conversations.filter((user) =>
-    user.title.toLowerCase().includes(filter)
+const filteredData = conversation?.filter((user) =>
+    user.subject.toLowerCase().includes(filter)
   );
   return (
     <div
@@ -57,11 +57,11 @@ const filteredData = props?.conversations.filter((user) =>
 
         {/* Conversation data */}
         <div className="conversation-list">
-          {filteredData.map((conversation) => (
+          {filteredData?.map((conversation) => (
             <div className="conversation-item" key={conversation.id}>
               <div className="conversation-info">
-                <h4 className="conversation-title">{conversation.title}</h4>
-                <p className="conversation-details">{conversation.details}</p>
+                <h4 className="conversation-title">{conversation.subject}</h4>
+                <p className="conversation-details">{conversation.description}</p>
                 <div className="conversation-support">
                   <span className="support-type">
                     <span className="support-icon">

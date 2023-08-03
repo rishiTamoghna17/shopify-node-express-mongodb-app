@@ -75,12 +75,17 @@ function ChatInput() {
   };
 
   const handleTicket = () => {
+    if(ticketBody!=="") {
     if (ticketRes.status === "open" || ticketRes.status === "panding") {
       SendReply(replyData);
+      setTicketBody("")
     } else {
       createZendeskTicket(ticketData);
+      setTicketBody("")
+
       
     }
+  }
   };
 
   function handleKeyDown(event) {
@@ -99,7 +104,7 @@ function ChatInput() {
         placeholder="Write a message..."
         className="message-input"
       />
-      <button onClick={handleTicket} className="send-button">
+      <button onClick={handleTicket} className="send-button" type="button">
         <BiSend size={20} color="red" />
       </button>
     </div>

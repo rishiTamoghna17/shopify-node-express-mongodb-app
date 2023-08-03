@@ -14,17 +14,20 @@ function ConversationBody() {
     new Array(conversation.length).fill(false)
   );
   const [iconIsDropdownOpen, setIconIsDropdownOpen] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState("user1");
   const [requestId, setRequestId] = useState("# abcD123");
-  const [ticketId, setTicketId] = useState("");
-  const [ticket, setTicket] = useState({})
+  const [selectedCustomer, setSelectedCustomer] = useState("user1");
+  const [ticketState, setTicketState] = useState({ id: "", ticket: {} });
+  const { id: ticketId, ticket } = ticketState;
   const fetch = useFetch();
-  const createdTicket = useSelector(state => state.ticketData).slice(-1)[0]
+  const createdTicket = useSelector(state => state.ticketData).slice(-1)[0];
+
+  const setTickets = () => {
+    setTicketState({ id: createdTicket?.result?.id, ticket: createdTicket?.result });
+  };
 
   useEffect(() => {
-    setTicket(createdTicket?.result)
-    setTicketId(createdTicket?.result?.id)
-  }, [createdTicket])
+    setTickets();
+  }, [createdTicket]);
 
   const fetchConversations = () => {
     if (ticketId === undefined) {
@@ -39,9 +42,7 @@ function ConversationBody() {
 
   useEffect(() => {
     fetchConversations();
-  }, [ticketId,conversation]);
-
-
+  }, [ticketId, conversation]);
 
   const getTimeElapsed = useMemo(() => (timestamp) => {
     return moment(timestamp).fromNow();
@@ -139,8 +140,8 @@ function ConversationBody() {
         </div>
       </div>
       <div className="chat-body">
-        {conversation.length !== 0 && conversation?.map((entry, index) => (
-          <div key={index} className="chat-message">
+        {conversation.length !== 0 && conversation?.map((entry,index) => (
+          <div key={entry.id} className="chat-message">
             <div
               className={
                 entry.author_id === ticket.requester_id ? "user-message" : "agent-message"
@@ -182,5 +183,6 @@ function ConversationBody() {
 }
 
 export default ConversationBody;
+
 
 
