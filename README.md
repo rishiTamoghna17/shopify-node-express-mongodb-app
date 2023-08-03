@@ -71,7 +71,6 @@ password : 65nuzrMc+8,VAmb
 
 <!-- https://admin.shopify.com/store/quickstart-b1d6d5a7/apps/7b7274195e893cc66728d24439275621 -->
 
-
-hJC4w8RTdH5Zz7C
+shopify url -  https://admin.shopify.com/store/quickstart-b1d6d5a7/apps/7b7274195e893cc66728d24439275621
 
 zendeskPassword - hJC4w8RTdH5Zz7C

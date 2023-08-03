@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useMemo} from "react";
 import { AiOutlineSearch, AiOutlineClockCircle } from "react-icons/ai";
 import { MdFavoriteBorder, MdReport } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
@@ -22,10 +22,9 @@ function ConversationBody() {
   const createdTicket = useSelector(state => state.ticketData).slice(-1)[0]
 
   useEffect(() => {
-  setTicket(createdTicket?.result)
-  setTicketId(createdTicket?.result?.id)
-  },[createdTicket])
-
+    setTicket(createdTicket?.result)
+    setTicketId(createdTicket?.result?.id)
+  }, [createdTicket])
 
   const fetchConversations = () => {
     if (ticketId === undefined) {
@@ -37,20 +36,16 @@ function ConversationBody() {
         .catch((error) => console.error('Error fetching conversations:', error));
     }
   };
- // Initial fetch when ticketId changes
-//  useEffect(() => {
-//    fetchConversations();
-//  },[]);
-    fetchConversations()
+
+  useEffect(() => {
+    fetchConversations();
+  }, [ticketId,conversation]);
 
 
-  // console.log("conversation", conversation);
-  // console.log("createdTicket",ticket)
 
-  const getTimeElapsed = (timestamp) => {
-    // Use moment.js to calculate the elapsed time
+  const getTimeElapsed = useMemo(() => (timestamp) => {
     return moment(timestamp).fromNow();
-  };
+  }, []);
 
   const handleIconDropdownToggle = () => {
     setIconIsDropdownOpen(!iconIsDropdownOpen);
@@ -63,17 +58,14 @@ function ConversationBody() {
       return newState;
     });
   };
-  // const userTxt = conversation.filter((data)=>data.author_id ===ticket.requester_id)
-  // const agentTxt = conversation.filter((data)=>data.author_id ===ticket.assignee_id)
 
-  
   const handleCustomerChange = (e) => {
     e.preventDefault();
     setSelectedCustomer(e.target.value);
   };
+
   return (
     <>
-    
       <div className="chat-header">
         <div className="chat-header-text">
           <select
@@ -147,8 +139,7 @@ function ConversationBody() {
         </div>
       </div>
       <div className="chat-body">
-        {conversation.length!==0 && conversation?.map((entry, index) => (
-          
+        {conversation.length !== 0 && conversation?.map((entry, index) => (
           <div key={index} className="chat-message">
             <div
               className={
@@ -157,12 +148,11 @@ function ConversationBody() {
             >
               <div className="message-content">
                 <div className="user-info">
-                  <strong>{(entry.author_id===ticket.requester_id?"user":"agent")}:</strong>
+                  <strong>{(entry.author_id === ticket.requester_id ? "user" : "agent")}:</strong>
                   <div className="chat-time-dot">
                     <span className="time-elapsed">
                       {getTimeElapsed(entry.created_at)}
                     </span>
-
                     <div
                       className={`dropdown ${
                         isDropdownOpen[index] ? "show" : ""
@@ -179,7 +169,6 @@ function ConversationBody() {
                         <div className="dropdown-item">Dislike</div>
                       </div>
                     </div>
-                    {/* <BsThreeDotsVertical color="white" size= "15px" /> */}
                   </div>
                 </div>
                 <div className="message">{entry.body}</div>
@@ -193,3 +182,5 @@ function ConversationBody() {
 }
 
 export default ConversationBody;
+
+
