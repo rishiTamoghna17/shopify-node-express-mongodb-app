@@ -37,7 +37,9 @@ function defaultPAge() {
 
         <section className="section-ai-chat">
           {isLogin === true ? (
-            <LoggedInAiChat width="50%" section2="30%" />
+            // <LoggedInAiChat width="50%" section2="30%" />
+            <AISection width="50%" section2="30%" />
+
           ) : (
             <AISection width="50%" section2="30%" />
           )}

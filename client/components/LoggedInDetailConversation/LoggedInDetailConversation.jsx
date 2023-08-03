@@ -84,11 +84,11 @@ function LoggedInDetailConversation(props) {
         <div className="loggedin-detail-conversation-support-conversation-members-title">
           <h1>Mumbers in this conversation ({members.length})</h1>
         </div>
-        {members?.map((member, index) => (
+        {members?.map((member) => (
           <div className="loggedin-detail-conversation-support-conversation-align">
             <div
               className="loggedin-detail-conversation-support-conversation-members-member-map"
-              key={index}
+              key={member.id}
             >
               <div className="loggedin-detail-conversation-support-conversation-members-member-icon-name-agent">
                 <div>{member.icon}</div>

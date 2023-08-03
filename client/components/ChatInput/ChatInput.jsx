@@ -25,8 +25,10 @@ function ChatInput() {
     ticketId: ticketRes.id, 
     body: ticketBody,
     authorEmail: "rex.doe@example.com",
-    authorId:ticketRes.submitter_id
+    authorId:ticketRes.submitter_id,  
+    status:"open"
   };
+
   console.log("replyData",replyData);
   console.log("ticketData",ticketData);
   
@@ -55,6 +57,7 @@ function ChatInput() {
   }
   console.log("ticketRes",ticketRes);
 
+
   const SendReply = (replyData) => {
     if (ticketRes && ticketStatus === "open") {
      
@@ -73,6 +76,8 @@ function ChatInput() {
         });
     }
   };
+
+
 
   const handleTicket = () => {
     if(ticketBody!=="") {

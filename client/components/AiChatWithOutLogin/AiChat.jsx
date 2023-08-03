@@ -6,8 +6,7 @@ import { CiPaperplane } from "react-icons/ci";
 import ChatInput from "../ChatInput/ChatInput";
 import "./Aichat.css";
 import ConversationBody from "../ConversationBody/ConversationBody";
-import {useSelector} from 'react-redux'
-
+import { useSelector } from "react-redux";
 
 const AISection = (props) => {
   const mainCategories = categorys.map((category) => category.mainCategory);
@@ -16,11 +15,14 @@ const AISection = (props) => {
   const [prompts, setPrompts] = useState([]);
   // const [promptText, setPromptText] = useState("");
   const [showDefaultText, setShowDefaultText] = useState(true);
-  const createdTicket = useSelector(state => state.ticketData).slice(-1)[0]
-  useEffect(() =>{
-    if(createdTicket?.result?.id)
-    setShowDefaultText(false)
-  },[createdTicket])
+  const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
+  useEffect(() => {
+    if (createdTicket?.result?.id) {
+      setShowDefaultText(false);
+    } else {
+      setShowDefaultText(true);
+    }
+  }, [createdTicket]);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCategoryIndex(
@@ -148,13 +150,12 @@ const AISection = (props) => {
         </>
       ) : (
         <section className="prompts">
-          <ConversationBody/>
+          <ConversationBody />
         </section>
       )}
       {/* <div className="default-text">Type and enter your problem</div> */}
 
-
-      <ChatInput 
+      <ChatInput
       // value = {promptText} handleSubmit = {handlePromptSubmit} onChange = {setPromptText}
       />
     </div>
