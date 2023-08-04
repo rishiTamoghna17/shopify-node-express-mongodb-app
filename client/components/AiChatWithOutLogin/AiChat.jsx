@@ -16,13 +16,16 @@ const AISection = (props) => {
   // const [promptText, setPromptText] = useState("");
   const [showDefaultText, setShowDefaultText] = useState(true);
   const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
+  const SelectedConversation = useSelector(state => state.showConversation).slice(-1)[0]
+  // console.log('SelectedConversation',SelectedConversation?.id)
+
   useEffect(() => {
-    if (createdTicket?.result?.id) {
+    if (createdTicket?.result?.id ||SelectedConversation?.id) {
       setShowDefaultText(false);
     } else {
       setShowDefaultText(true);
     }
-  }, [createdTicket]);
+  }, [createdTicket,SelectedConversation]);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCategoryIndex(

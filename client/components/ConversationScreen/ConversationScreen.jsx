@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiRefresh } from "react-icons/bi";
 import { FiFilter } from "react-icons/fi";
 import { FaRegStar, FaStar } from "react-icons/fa";
@@ -6,16 +6,29 @@ import { TiMessage } from "react-icons/ti";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./ConversionScreen.css";
 import NewRequestButton from "../NewRequestButton/NewRequestButton";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { add } from "../../reduxStore/slices/showConversation";
+
 
 const ConversationScreen = (props) => {
-const [filter, SetFilter] = useState("");
+  const [filter, SetFilter] = useState("");
+  const [selectedConversation, setSelectedConversation] = useState(null);
+  const conversation = useSelector((state) => state.conversation).slice(-1)[0];
 
-  const conversation = useSelector(state => state.conversation).slice(-1)[0]
-console.log("conversation",conversation);
+  console.log("conversation", conversation);
 
+  const dispatch = useDispatch();
+  const handleConversationClick = (conversation) => {
+    setSelectedConversation(conversation);
+    
+  };
+  useEffect(()=>{
+    dispatch(add(selectedConversation));
+  },[selectedConversation])
+// console.log("selectedConversation",selectedConversation)
 
-const filteredData = conversation?.filter((user) =>
+  const filteredData = conversation?.filter((user) =>
     user.subject.toLowerCase().includes(filter)
   );
   return (
@@ -43,14 +56,14 @@ const filteredData = conversation?.filter((user) =>
 
             {/* Refresh button */}
             <div className="conversation-header-refresh-button-edit">
-            <button className="conversation-header-refresh-button">
-              <BiRefresh size={20} color = "white" />
-            </button>
+              <button className="conversation-header-refresh-button">
+                <BiRefresh size={20} color="white" />
+              </button>
 
-            {/* Filter button */}
-            <button className="filter-button">
-              <FiFilter size={20} color = "white" />
-            </button>
+              {/* Filter button */}
+              <button className="filter-button">
+                <FiFilter size={20} color="white" />
+              </button>
             </div>
           </div>
         </div>
@@ -58,10 +71,16 @@ const filteredData = conversation?.filter((user) =>
         {/* Conversation data */}
         <div className="conversation-list">
           {filteredData?.map((conversation) => (
-            <div className="conversation-item" key={conversation.id}>
+            <div
+              className="conversation-item"
+              key={conversation.id}
+              onClick={() => handleConversationClick(conversation)}
+            >
               <div className="conversation-info">
                 <h4 className="conversation-title">{conversation.subject}</h4>
-                <p className="conversation-details">{conversation.description}</p>
+                <p className="conversation-details">
+                  {conversation.description}
+                </p>
                 <div className="conversation-support">
                   <span className="support-type">
                     <span className="support-icon">
@@ -80,7 +99,7 @@ const filteredData = conversation?.filter((user) =>
         </div>
       </div>
       <div className="conversation-footer">
-        <NewRequestButton/>
+        <NewRequestButton />
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
-import React,{useState,useEffect,useMemo} from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AiOutlineSearch, AiOutlineClockCircle } from "react-icons/ai";
 import { MdFavoriteBorder, MdReport } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
 import useFetch from "../../hooks/useFetch";
-import './ConversationBody.css'
-import {useSelector} from 'react-redux'
+import "./ConversationBody.css";
+import { useSelector } from "react-redux";
 
 function ConversationBody() {
   const [conversation, setConversation] = useState([]);
@@ -19,10 +19,16 @@ function ConversationBody() {
   const [ticketState, setTicketState] = useState({ id: "", ticket: {} });
   const { id: ticketId, ticket } = ticketState;
   const fetch = useFetch();
-  const createdTicket = useSelector(state => state.ticketData).slice(-1)[0];
-
+  const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
+  const SelectedConversation = useSelector(
+    (state) => state.showConversation
+  ).slice(-1)[0];
+  console.log("SelectedConversation", SelectedConversation);
   const setTickets = () => {
-    setTicketState({ id: createdTicket?.result?.id, ticket: createdTicket?.result });
+    setTicketState({
+      id: createdTicket?.result?.id,
+      ticket: createdTicket?.result,
+    });
   };
 
   useEffect(() => {
@@ -30,23 +36,37 @@ function ConversationBody() {
   }, [createdTicket]);
 
   const fetchConversations = () => {
-    if (ticketId === undefined) {
+    if (ticketId === undefined || SelectedConversation.id == undefined) {
       setConversation([]);
-    } else {
+    } else if (SelectedConversation.id) {
+      fetch(`/api/tickets/${SelectedConversation.id}/conversations`)
+        .then((response) => response.json())
+        .then((data) => setConversation(data))
+        .catch((error) =>
+          console.error("Error fetching conversations:", error)
+        );
+    } else if (ticketId) {
       fetch(`/api/tickets/${ticketId}/conversations`)
         .then((response) => response.json())
         .then((data) => setConversation(data))
-        .catch((error) => console.error('Error fetching conversations:', error));
+        .catch((error) =>
+          console.error("Error fetching conversations:", error)
+        );
     }
   };
 
   useEffect(() => {
     fetchConversations();
-  }, [ticketId, conversation]);
+  }, [ticketId, SelectedConversation.id]);
 
-  const getTimeElapsed = useMemo(() => (timestamp) => {
-    return moment(timestamp).fromNow();
-  }, []);
+  console.log("SelectedConversationexplain", conversation);
+
+  const getTimeElapsed = useMemo(
+    () => (timestamp) => {
+      return moment(timestamp).fromNow();
+    },
+    []
+  );
 
   const handleIconDropdownToggle = () => {
     setIconIsDropdownOpen(!iconIsDropdownOpen);
@@ -109,7 +129,7 @@ function ConversationBody() {
           <h1
             style={{ color: "white", fontWeight: "bold", marginRight: "10px" }}
           >
-            Ticket ID: {ticketId}
+            Ticket ID: {SelectedConversation?SelectedConversation.id:ticketId}
           </h1>
         </div>
         <div className="chat-icons">
@@ -140,49 +160,60 @@ function ConversationBody() {
         </div>
       </div>
       <div className="chat-body">
-        {conversation.length !== 0 && conversation?.map((entry,index) => (
-          <div key={entry.id} className="chat-message">
-            <div
-              className={
-                entry.author_id === ticket.requester_id ? "user-message" : "agent-message"
-              }
-            >
-              <div className="message-content">
-                <div className="user-info">
-                  <strong>{(entry.author_id === ticket.requester_id ? "user" : "agent")}:</strong>
-                  <div className="chat-time-dot">
-                    <span className="time-elapsed">
-                      {getTimeElapsed(entry.created_at)}
-                    </span>
-                    <div
-                      className={`dropdown ${
-                        isDropdownOpen[index] ? "show" : ""
-                      }`}
-                    >
-                      <i
-                        className="dropdown-icon chat-icon"
-                        onClick={() => handleDropdownToggle(index)}
+        {conversation.length !== 0 &&
+          conversation?.map((entry, index) => (
+            <div key={entry.id} className="chat-message">
+              <div
+                className={
+                  (SelectedConversation
+                    ? entry.author_id === SelectedConversation.requester_id
+                    : entry.author_id === ticket.requester_id)
+                    ? "user-message"
+                    : "agent-message"
+                }
+              >
+                <div className="message-content">
+                  <div className="user-info">
+                    <strong>
+                      {SelectedConversation
+                        ? entry.author_id === SelectedConversation.requester_id
+                          ? "user"
+                          : "agent"
+                        : entry.author_id === ticket.requester_id
+                        ? "user"
+                        : "agent"}
+                      :
+                    </strong>
+                    <div className="chat-time-dot">
+                      <span className="time-elapsed">
+                        {getTimeElapsed(entry.created_at)}
+                      </span>
+                      <div
+                        className={`dropdown ${
+                          isDropdownOpen[index] ? "show" : ""
+                        }`}
                       >
-                        <BsThreeDotsVertical size={20} />
-                      </i>
-                      <div className="dropdown-content">
-                        <div className="dropdown-item">Like</div>
-                        <div className="dropdown-item">Dislike</div>
+                        <i
+                          className="dropdown-icon chat-icon"
+                          onClick={() => handleDropdownToggle(index)}
+                        >
+                          <BsThreeDotsVertical size={20} />
+                        </i>
+                        <div className="dropdown-content">
+                          <div className="dropdown-item">Like</div>
+                          <div className="dropdown-item">Dislike</div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div className="message">{entry.body}</div>
                 </div>
-                <div className="message">{entry.body}</div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );
 }
 
 export default ConversationBody;
-
-
-
