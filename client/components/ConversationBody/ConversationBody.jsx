@@ -35,29 +35,28 @@ function ConversationBody() {
     setTickets();
   }, [createdTicket]);
 
-  const fetchConversations = () => {
-    if (ticketId === undefined || SelectedConversation.id == undefined) {
-      setConversation([]);
-    } else if (SelectedConversation.id) {
-      fetch(`/api/tickets/${SelectedConversation.id}/conversations`)
-        .then((response) => response.json())
-        .then((data) => setConversation(data))
-        .catch((error) =>
-          console.error("Error fetching conversations:", error)
-        );
-    } else if (ticketId) {
+  const fetchInitialConversations = () => {
+    if (ticketId) {
       fetch(`/api/tickets/${ticketId}/conversations`)
         .then((response) => response.json())
         .then((data) => setConversation(data))
-        .catch((error) =>
-          console.error("Error fetching conversations:", error)
-        );
+        .catch((error) => console.error("Error fetching conversations:", error));
     }
   };
-
+  
   useEffect(() => {
-    fetchConversations();
-  }, [ticketId, SelectedConversation.id]);
+    fetchInitialConversations();
+  }, [ticketId,conversation]);
+  
+  useEffect(() => {
+    if (SelectedConversation?.id) {
+      fetch(`/api/tickets/${SelectedConversation.id}/conversations`)
+        .then((response) => response.json())
+        .then((data) => setConversation(data))
+        .catch((error) => console.error("Error fetching conversations:", error));
+    }
+  }, [SelectedConversation?.id]);
+
 
   console.log("SelectedConversationexplain", conversation);
 
