@@ -25,8 +25,11 @@ function NewRequestButton(props) {
   console.log("cteate new ticket")
 };
 useEffect(() => {
+ 
   dispatch(add(newTicket))
-},[newTicket])
+  setNewTicket(false);
+
+},[newTicket,dispatch])
 
 
   return (

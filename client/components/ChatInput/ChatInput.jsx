@@ -100,6 +100,9 @@ function ChatInput() {
 
       if (newTicket) {
         createZendeskTicket(ticketData);
+        setTicketBody("");
+      setNewTicket(false)
+
       } else if (
         replyData.status === "open" ||
         replyData.status === "panding"
