@@ -15,6 +15,7 @@ const ConversationScreen = (props) => {
   const [filter, SetFilter] = useState("");
   const [selectedConversation, setSelectedConversation] = useState(null);
   const conversation = useSelector((state) => state.conversation).slice(-1)[0];
+  const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
 
   console.log("conversation", conversation);
 
@@ -67,7 +68,7 @@ const ConversationScreen = (props) => {
             </div>
           </div>
         </div>
-
+<h1 style = {{color:"white"}}>{filteredData.length}</h1>
         {/* Conversation data */}
         <div className="conversation-list">
           {filteredData?.map((conversation) => (

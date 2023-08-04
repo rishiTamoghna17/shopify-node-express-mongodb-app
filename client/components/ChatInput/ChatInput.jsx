@@ -5,6 +5,8 @@ import useFetch from "../../hooks/useFetch";
 import createZendeskTicket from "../../apis/createZendesk";
 import { useDispatch } from "react-redux";
 import { addTicketData } from "../../reduxStore/slices/AddTicketData";
+import { useSelector } from "react-redux";
+
 
 function ChatInput() {
   const [ticketBody, setTicketBody] = useState("");
@@ -12,6 +14,9 @@ function ChatInput() {
   const [ticketStatus, setTicketStatus] = useState("")
   const fetch = useFetch();
   const dispatch = useDispatch();
+  const SelectedConversation = useSelector(
+    (state) => state.showConversation
+  ).slice(-1)[0];
 
   const ticketData = {
     subject: "orem Ipsum is simply dummy text",
@@ -22,11 +27,11 @@ function ChatInput() {
     status: "open",
   };
   const replyData = {
-    ticketId: ticketRes.id, 
+    ticketId: SelectedConversation?.id || ticketRes.id, 
     body: ticketBody,
     authorEmail: "rex.doe@example.com",
-    authorId:ticketRes.submitter_id,  
-    status:"open"
+    authorId:SelectedConversation?.submitter_id || ticketRes.submitter_id,  
+    status:SelectedConversation?.status || ticketRes.status, 
   };
 
   console.log("replyData",replyData);
@@ -59,8 +64,7 @@ function ChatInput() {
 
 
   const SendReply = (replyData) => {
-    if (ticketRes && ticketStatus === "open") {
-     
+    if ((replyData.ticketId && replyData.status === "open")) {
 
       fetch(`/api/tickets/${replyData.ticketId}/addConversation`, {
         method: "POST",
@@ -81,7 +85,7 @@ function ChatInput() {
 
   const handleTicket = () => {
     if(ticketBody!=="") {
-    if (ticketRes.status === "open" || ticketRes.status === "panding") {
+    if (replyData.status === "open" || replyData.status === "panding") {
       SendReply(replyData);
       setTicketBody("")
     } else {

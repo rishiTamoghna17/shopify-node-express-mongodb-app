@@ -55,7 +55,7 @@ function ConversationBody() {
         .then((data) => setConversation(data))
         .catch((error) => console.error("Error fetching conversations:", error));
     }
-  }, [SelectedConversation?.id]);
+  }, [SelectedConversation?.id,conversation]);
 
 
   console.log("SelectedConversationexplain", conversation);
@@ -165,8 +165,8 @@ function ConversationBody() {
               <div
                 className={
                   (SelectedConversation
-                    ? entry.author_id === SelectedConversation.requester_id
-                    : entry.author_id === ticket.requester_id)
+                    ? entry.author_id === SelectedConversation?.requester_id
+                    : entry.author_id === ticket?.requester_id)
                     ? "user-message"
                     : "agent-message"
                 }
@@ -175,7 +175,7 @@ function ConversationBody() {
                   <div className="user-info">
                     <strong>
                       {SelectedConversation
-                        ? entry.author_id === SelectedConversation.requester_id
+                        ? entry.author_id === SelectedConversation?.requester_id
                           ? "user"
                           : "agent"
                         : entry.author_id === ticket.requester_id

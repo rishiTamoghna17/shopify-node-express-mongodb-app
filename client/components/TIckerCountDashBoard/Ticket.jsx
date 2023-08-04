@@ -6,6 +6,7 @@ import { DatePicker } from "antd";
 import { AiOutlineMail } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { add } from "../../reduxStore/slices/conversation.js";
+import { useSelector } from "react-redux";
 
 function Ticket({ graph }) {
   const [selectedAutomationType, setSelectedAutomationType] = useState("all");
@@ -68,7 +69,7 @@ function Ticket({ graph }) {
   });
 
   const [chartData, setChartData] = useState(getInitialChartData());
-
+  const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
   async function fetchData() {
     setIsLoading(true);
     const res = await fetch("/api/tickets");
@@ -88,7 +89,7 @@ function Ticket({ graph }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [createdTicket]);
 
   const totalTicketCount = useMemo(() => ticket.length, [ticket]);
 
