@@ -6,6 +6,7 @@ import { TiMessage } from "react-icons/ti";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./ConversionScreen.css";
 import NewRequestButton from "../NewRequestButton/NewRequestButton";
+import useFetch from "../../hooks/useFetch";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { add } from "../../reduxStore/slices/showConversation";
@@ -14,10 +15,32 @@ import { add } from "../../reduxStore/slices/showConversation";
 const ConversationScreen = (props) => {
   const [filter, SetFilter] = useState("");
   const [selectedConversation, setSelectedConversation] = useState(null);
-  const conversation = useSelector((state) => state.conversation).slice(-1)[0];
+  const [isLoading, setIsLoading] = useState(true);
+  const [conversation, setConversation] = useState([]);
+  const fetch = useFetch();
+  // const conversation = useSelector((state) => state.conversation).slice(-1)[0];
   const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
 
+
+  async function fetchData() {
+    setIsLoading(true);
+    const res = await fetch("/api/tickets");
+    const response = await res.json();
+    console.log(response);
+    if (response.error) {
+      setConversation([]);
+    } else {
+      console.log('setConversation',response)
+      setConversation(response);
+    }
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [createdTicket]);
   console.log("conversation", conversation);
+
 
   const dispatch = useDispatch();
   const handleConversationClick = (conversation) => {
@@ -37,6 +60,8 @@ const ConversationScreen = (props) => {
       className="ConversationScreenWithhoutLogIn"
       style={{ width: props.width, left: props.section1 }}
     >
+       
+        
       <div className="conversation-all-header">
         <div className="search-bar">
           <input
@@ -68,8 +93,11 @@ const ConversationScreen = (props) => {
             </div>
           </div>
         </div>
-<h1 style = {{color:"white"}}>{filteredData.length}</h1>
+<h1 className="text-white">{filteredData?.length}</h1>
         {/* Conversation data */}
+        {isLoading ? (
+        <div className="text-white">Loading...</div>
+      ) : (
         <div className="conversation-list">
           {filteredData?.map((conversation) => (
             <div
@@ -98,10 +126,12 @@ const ConversationScreen = (props) => {
             </div>
           ))}
         </div>
+      )}
       </div>
       <div className="conversation-footer">
         <NewRequestButton />
       </div>
+      
     </div>
   );
 };

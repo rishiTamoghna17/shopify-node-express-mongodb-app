@@ -103,7 +103,9 @@
 .filter-button:hover {
   opacity: 0.8;
 }
-
+.text-white{
+  color:white;
+}
 .conversation-list {
   border: 1px solid #ccc;
   border-radius: 4px;
