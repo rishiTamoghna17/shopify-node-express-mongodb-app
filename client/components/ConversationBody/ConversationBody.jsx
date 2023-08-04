@@ -24,6 +24,10 @@ function ConversationBody() {
   const SelectedConversation = useSelector(
     (state) => state.showConversation
   ).slice(-1)[0];
+  const addConversation = useSelector((state) => state.addConversation).slice(
+    -1
+  )[0];
+  console.log("addConversation", addConversation);
   console.log("SelectedConversation", SelectedConversation);
   const setTickets = () => {
     setTicketState({
@@ -47,7 +51,7 @@ function ConversationBody() {
   
   useEffect(() => {
     fetchInitialConversations();
-  }, [ticketId,conversation]);
+  }, [ticketId,addConversation]);
   
   useEffect(() => {
     if (SelectedConversation?.id) {
@@ -56,7 +60,7 @@ function ConversationBody() {
         .then((data) => setConversation(data))
         .catch((error) => console.error("Error fetching conversations:", error));
     }
-  }, [SelectedConversation?.id,conversation]);
+  }, [SelectedConversation?.id,addConversation]);
 
 
   console.log("SelectedConversationexplain", conversation);

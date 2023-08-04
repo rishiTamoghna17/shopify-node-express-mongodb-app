@@ -5,6 +5,8 @@ import useFetch from "../../hooks/useFetch";
 import createZendeskTicket from "../../apis/createZendesk";
 import { useDispatch } from "react-redux";
 import { addTicketData } from "../../reduxStore/slices/AddTicketData";
+import { add } from "../../reduxStore/slices/addConversation";
+
 import { useSelector } from "react-redux";
 
 function ChatInput() {
@@ -12,6 +14,7 @@ function ChatInput() {
   const [ticketRes, setTicketRes] = useState([]);
   const [ticketStatus, setTicketStatus] = useState("");
   const [newTicket, setNewTicket] = useState(false);
+  const [addConversation, setAddConversation] = useState(false);
   const fetch = useFetch();
   const dispatch = useDispatch();
   const SelectedConversation = useSelector(
@@ -92,6 +95,9 @@ function ChatInput() {
 
   const handleTicket = () => {
     if (ticketBody !== "") {
+
+      setAddConversation(!addConversation)
+
       if (newTicket) {
         createZendeskTicket(ticketData);
       } else if (
@@ -106,6 +112,12 @@ function ChatInput() {
       }
     }
   };
+
+  useEffect(() => {
+    dispatch(add(addConversation))
+  },[addConversation])
+  
+  // console.log("addConversation",addConversation)
 
   function handleKeyDown(event) {
     if (event.keyCode === 13) {
