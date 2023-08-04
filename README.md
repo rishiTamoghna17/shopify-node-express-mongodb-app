@@ -52,9 +52,10 @@ SHOPIFY_API_VERSION="2023-04"
 MONGO_URL= "mongodb://mongo:4cUZODmtdYJWuLtC6NLR@containers-us-west-69.railway.app:7048"
 ENCRYPTION_STRING=ENCRYPTION_STRING
 NPM_CONFIG_FORCE=true
-zendesk_api_token  = 3bLzn0Hj4iAd79lKo3e0I9M4us6iEqm7wB9KCI1u
-zendesk_remote_Uri = https://rex4263.zendesk.com/api/v2
-zendesk_username = tamoghanamondal.zerone@gmail.com
+zendesk_api_token  = B7kdrfUvfL5LTkETOwKTw9Nr3s1ciGC5hfSGTx6z
+zendesk_remote_Uri = https://rexxxsupport.zendesk.com/api/v2
+zendesk_username = tamoghnarishi17@gmail.com
+zendesk_password = hJC4w8RTdH5Zz7C
 
 
 
