@@ -20,6 +20,7 @@ function ConversationBody() {
   const { id: ticketId, ticket } = ticketState;
   const fetch = useFetch();
   const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
+  
   const SelectedConversation = useSelector(
     (state) => state.showConversation
   ).slice(-1)[0];

@@ -2,11 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import ConversationSlice from './slices/conversation'
 import  TicketData  from './slices/AddTicketData'
 import  ShowConversationSlice  from './slices/showConversation'
+import  CreateNewTicket  from './slices/createNewTicket'
+
 
 export const store = configureStore({
   reducer: {
     conversation:ConversationSlice,
     ticketData:TicketData,
-    showConversation:ShowConversationSlice
+    showConversation:ShowConversationSlice,
+    createNewTicket:CreateNewTicket
   }
 })

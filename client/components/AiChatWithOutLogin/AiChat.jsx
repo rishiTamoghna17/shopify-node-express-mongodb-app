@@ -18,6 +18,15 @@ const AISection = (props) => {
   const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
   const SelectedConversation = useSelector(state => state.showConversation).slice(-1)[0]
   // console.log('SelectedConversation',SelectedConversation?.id)
+  const newTicketBool = useSelector((state) => state.createNewTicket).slice(
+    -1
+  )[0];
+
+  useEffect(() => {
+    if (newTicketBool) {
+      setShowDefaultText(true)
+    }
+  }, [newTicketBool]);
 
   useEffect(() => {
     if (createdTicket?.result?.id ||SelectedConversation?.id) {
