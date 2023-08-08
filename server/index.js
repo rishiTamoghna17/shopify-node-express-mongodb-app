@@ -21,6 +21,9 @@ import verifyRequest from "./middleware/verifyRequest.js";
 import proxyRouter from "./routes/app_proxy/index.js";
 import userRoutes from "./routes/index.js";
 import webhookRegistrar from "./webhooks/index.js";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import  cors from 'cors'
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
@@ -36,11 +39,29 @@ mongoose.connect(mongoUrl);
 // Register all webhook handlers
 webhookRegistrar();
 
-const createServer = async (root = process.cwd()) => {
+const createServers = async (root = process.cwd()) => {
   const app = Express();
   app.disable("x-powered-by");
 
   applyAuthMiddleware(app);
+
+  app.use(cors())
+  const server = createServer(app);
+  const io = new Server(server,{
+    cors: {
+      origin: "*",
+      allowedHeaders: ["my-custom-header"],
+      credentials: true
+    }
+  });
+
+  io.on("connection", (socket) => {
+    // console.log("hey! I am socket");
+    socket.on("conversation", (payload) => {
+      console.log("payload", payload);
+      io.emit("conversation", payload);
+    });
+  });
 
   // Incoming webhook requests
   app.post(
@@ -149,11 +170,11 @@ const createServer = async (root = process.cwd()) => {
     });
   }
 
-  return { app };
+  return { app,server };
 };
 
-createServer().then(({ app }) => {
-  app.listen(PORT, () => {
+createServers().then(({ server }) => {
+  server.listen(PORT, () => {
     console.log(`--> Running on ${PORT}`);
   });
 });
