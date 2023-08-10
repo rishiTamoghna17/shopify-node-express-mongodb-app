@@ -75,7 +75,9 @@
       if (replyData.ticketId) {
         fetch(`/api/tickets/${replyData.ticketId}/addConversation`, {
           method: "POST",
+
           headers: {
+            
             "Content-Type": "application/json",
           },
           body: JSON.stringify(replyData),
