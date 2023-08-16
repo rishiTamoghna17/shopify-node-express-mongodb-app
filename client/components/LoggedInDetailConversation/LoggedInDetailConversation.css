@@ -62,6 +62,21 @@ h1{
   
   margin-top: 5px;
 }
+
+.detail-conversation-support-request-progress-circle{
+  width: 20px;
+  height: 20px;
+  border: 2px solid lightcoral;
+  border-top-color: red; 
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 .detail-conversation-support-request-response{
   margin-left: 15px;
   /* background-color: grey; */

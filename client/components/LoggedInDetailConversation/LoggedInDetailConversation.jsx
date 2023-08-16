@@ -59,7 +59,8 @@ function LoggedInDetailConversation(props) {
               <div className="detail-conversation-support-request-type">
                 <div className="detail-conversation-support-request-type-icon-one">
                   {request.status === "in progress" ? (
-                    <AiOutlineLoading3Quarters color="red" size={20} />
+                    // <AiOutlineLoading3Quarters color="red" size={20} />
+                    <div class="detail-conversation-support-request-progress-circle"></div>
                   ) : (
                     ""
                   )}
