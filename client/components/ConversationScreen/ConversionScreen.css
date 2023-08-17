@@ -84,7 +84,9 @@
 .conversation-header-dropdown select::-ms-expand {
   display: none;
 }
-
+.conversation-header-dropdown-option{
+  color: black;
+}
 .conversation-header-refresh-button-edit{
   display: flex;
 }
@@ -123,6 +125,7 @@
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .conversation-info {

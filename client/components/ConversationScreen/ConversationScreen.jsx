@@ -17,6 +17,8 @@ const ConversationScreen = (props) => {
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [conversation, setConversation] = useState([]);
+  const [selectedDropDownFilter, setSelectedDropDownFilter] = useState("");
+
   const fetch = useFetch();
   // const conversation = useSelector((state) => state.conversation).slice(-1)[0];
   const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
@@ -52,9 +54,18 @@ const ConversationScreen = (props) => {
   },[selectedConversation])
 // console.log("selectedConversation",selectedConversation)
 
-  const filteredData = conversation?.filter((user) =>
-    user.subject.toLowerCase().includes(filter)
-  );
+const filteredData = conversation?.filter((user) => {
+  const matchesSubject = user.subject.toLowerCase().includes(filter);
+
+  if (selectedDropDownFilter === "") {
+    return matchesSubject; // Only apply subject filter
+  } else if (selectedDropDownFilter === "open") {
+    return matchesSubject && user.status === "open"; // Apply both subject and status filters
+  } else if (selectedDropDownFilter === "closed") {
+    return matchesSubject && (user.status === "closed" || user.status === "solved") ; // Apply both subject and status filters
+  }
+});
+
   return (
     <div
       className="ConversationScreenWithhoutLogIn"
@@ -74,10 +85,10 @@ const ConversationScreen = (props) => {
         <div className="conversation-header-row">
           <div className="conversation-header-dropdown">
             {/* Conversation status dropdown */}
-            <select>
-              <option value="">All</option>
-              <option value="open">Open</option>
-              <option value="closed">Closed</option>
+            <select value={selectedDropDownFilter} onChange={(e) => setSelectedDropDownFilter(e.target.value)}>
+              <option className="conversation-header-dropdown-option" value="">All</option>
+              <option className="conversation-header-dropdown-option" value="open">Open</option>
+              <option className="conversation-header-dropdown-option" value="closed">Closed</option>
             </select>
 
             {/* Refresh button */}

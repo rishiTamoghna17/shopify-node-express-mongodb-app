@@ -90,24 +90,24 @@ userRoutes.get("/api/tickets/:ticketId/conversations", async (req, res) => {
 });
 
 //update ticket
-// userRoutes.post('/api/tickets/:ticketId/closeTicket', async (req, res) => {
-//   const { ticketId } = req.params;
-//   const {status} = req.body;
-//   // Use the Zendesk API client to close the ticket
-//   zd.tickets.update(ticketId, {
-//     ticket: {
-//       status: status,
-//     },
-//   }, (err, req, result) => {
-//     if (err) {
-//       console.error('Error closing the ticket:', err);
-//       res.status(500).json({ error: 'Failed to close the ticket' });
-//     } else {
-//       console.log(result)
-//       res.status(200).send({ message: 'Ticket closed successfully!', success: true });
-//     }
-//   });
-// });
+userRoutes.post('/api/tickets/:ticketId/reopen', async (req, res) => {
+  const { ticketId } = req.params;
+  const {status} = req.body;
+  // Use the Zendesk API client to close the ticket
+  zd.tickets.update(ticketId, {
+    ticket: {
+      status: status,
+    },
+  }, (err, req, result) => {
+    if (err) {
+      console.error('Error closing the ticket:', err);
+      res.status(500).json({ error: 'Failed to close the ticket' });
+    } else {
+      console.log(result)
+      res.status(200).send({ message: 'Ticket closed successfully!', success: true });
+    }
+  });
+});
 
 // Add conversation to a ticket
 userRoutes.post("/api/tickets/:ticketId/addConversation", async (req, res) => {
@@ -135,7 +135,7 @@ userRoutes.post("/api/tickets/:ticketId/addConversation", async (req, res) => {
       } else {
         res
           .status(201)
-          .send({ message: "Conversation added successfully!", success: true });
+          .send({ data: result, message: "Conversation added successfully!", success: true });
       }
     }
   );

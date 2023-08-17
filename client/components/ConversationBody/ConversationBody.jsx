@@ -17,6 +17,7 @@ function ConversationBody() {
   const [requestId, setRequestId] = useState("# abcD123");
   const [selectedCustomer, setSelectedCustomer] = useState("user1");
   const [ticketState, setTicketState] = useState({ id: "", ticket: {} });
+  const [selectedConversation,setSelectedConversation] = useState({})
   const { id: ticketId, ticket } = ticketState;
   const fetch = useFetch();
   const createdTicket = useSelector((state) => state.ticketData).slice(-1)[0];
@@ -28,7 +29,9 @@ function ConversationBody() {
     -1
   )[0];
   console.log("addConversation", addConversation);
-  console.log("SelectedConversation", SelectedConversation);
+
+
+
   const setTickets = () => {
     setTicketState({
       id: createdTicket?.result?.id,
@@ -37,7 +40,16 @@ function ConversationBody() {
   };
 
   useEffect(() => {
+    setSelectedConversation(SelectedConversation)
+    setTicketState({})
+  }, [SelectedConversation]);
+
+  console.log("SelectedConversation", selectedConversation);
+
+
+  useEffect(() => {
     setTickets();
+    setSelectedConversation({})
   }, [createdTicket]);
 
   const fetchInitialConversations = () => {
@@ -54,13 +66,13 @@ function ConversationBody() {
   }, [ticketId,addConversation]);
   
   useEffect(() => {
-    if (SelectedConversation?.id) {
-      fetch(`/api/tickets/${SelectedConversation.id}/conversations`)
+    if (selectedConversation?.id) {
+      fetch(`/api/tickets/${selectedConversation.id}/conversations`)
         .then((response) => response.json())
         .then((data) => setConversation(data))
         .catch((error) => console.error("Error fetching conversations:", error));
     }
-  }, [SelectedConversation?.id,addConversation]);
+  }, [selectedConversation?.id,addConversation]);
 
 
   console.log("SelectedConversationexplain", conversation);
@@ -133,7 +145,7 @@ function ConversationBody() {
           <h1
             style={{ color: "white", fontWeight: "bold", marginRight: "10px" }}
           >
-            Ticket ID: {SelectedConversation?SelectedConversation.id:ticketId}
+            Ticket ID: {selectedConversation?selectedConversation.id:ticketId}
           </h1>
         </div>
         <div className="chat-icons">
@@ -169,8 +181,8 @@ function ConversationBody() {
             <div key={entry.id} className="chat-message">
               <div
                 className={
-                  (SelectedConversation
-                    ? entry.author_id === SelectedConversation?.requester_id
+                  (selectedConversation
+                    ? entry.author_id === selectedConversation?.requester_id
                     : entry.author_id === ticket?.requester_id)
                     ? "user-message"
                     : "agent-message"
@@ -179,8 +191,8 @@ function ConversationBody() {
                 <div className="message-content">
                   <div className="user-info">
                     <strong>
-                      {SelectedConversation
-                        ? entry.author_id === SelectedConversation?.requester_id
+                      {selectedConversation
+                        ? entry.author_id === selectedConversation?.requester_id
                           ? "user"
                           : "agent"
                         : entry.author_id === ticket.requester_id
