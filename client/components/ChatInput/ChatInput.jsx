@@ -19,7 +19,7 @@ function ChatInput() {
   const [addConversation, setAddConversation] = useState(false);
   const [aiConversationEnd, setAiConversationEnd] = useState(false);
   const [conversations, setConversations] = useState({});
-  const [dropdown, setDropdown] = useState("CLOSED");
+  const [dropdown, setDropdown] = useState("closed");
   const [message, setMessage] = useState([]);
   const fetch = useFetch();
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function ChatInput() {
     status: "open",
   };
   const replyData = {
-    ticketId: conversations?.id || ticketRes.id,
+    ticketId: conversations?.id || ticketRes?.id,
     body: ticketBody,
     authorEmail: "rex.doe@example.com",
     authorId: conversations?.submitter_id || ticketRes.submitter_id,
